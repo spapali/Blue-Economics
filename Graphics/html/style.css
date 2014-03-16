@@ -1,0 +1,579 @@
+html {
+	font-size: 100%;
+}
+
+/*These are the styles for the landing page*/
+#bidvideobackground {
+	z-index: -1;
+}
+
+#layover {
+	position: absolute;
+	z-index: 1;
+	background-color: #6DA7BF;
+	opacity:0.74;
+	filter:alpha(opacity=74); /* For IE8 and earlier */
+	width: 100%;
+	height: 100%;
+}
+
+#frontpagecontent {
+	width: 1260px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#layover h1 {
+	margin-top: 32%;
+	color: #FFFFFF;
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: 700;
+	float: left;
+	text-transform: lowercase;
+}
+
+#menubar {
+	float: right;
+	height: 100%;
+	width: 189px;
+	padding-top: 200px;
+	background-color: #08516F;
+	opacity:0.83;
+	filter:alpha(opacity=83); /* For IE8 and earlier */
+}
+
+#menubar ul {
+	list-style-type: none;
+	font-style: normal !important;
+}
+
+#menubar ul li {
+	font-family: 'Merriweather Sans', sans-serif;
+	color: #FFFFFF;
+	font-weight: 300;
+	font-style: normal !important;
+	font-size: 0.9em;
+	line-height: 120%;
+	text-align: center;
+	opacity:1.0 !important;
+	filter:alpha(opacity=100); /* For IE8 and earlier */
+	margin-left: -40px;
+	padding-top: 10px;
+}
+
+#menubar img {
+	padding-left: 7px;
+}
+
+/*These are the styles for the nav bar*/
+
+#menuwrapper {
+	position: absolute;
+	background-color: #001C2F;
+	opacity:0.9;
+	filter:alpha(opacity=90); /* For IE8 and earlier */
+	height: 57px;
+	padding-top: .5%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	margin-right: auto;
+}
+
+
+#menu {
+	width: 1050px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#menuwrapper ul {
+	list-style-type: none;
+	margin-top: -3%;
+}
+
+#menuwrapper li {
+	display: inline;
+	font-size: .90em;
+	padding-left: 3%;
+	font-family: 'Merriweather Sans', sans-serif;
+	color: #FFFFFF;
+	font-weight: 300;
+	opacity:1.0 !important;
+	filter:alpha(opacity=100); /* For IE8 and earlier */
+}
+
+/*These are the styles for the searchbar/header portion*/
+
+#blueeconlogo {
+	position: absolute;
+	padding-left: 10px;
+	padding-top: 10px;
+	height: 60px;
+}
+
+.hover_text {
+	visibility:hidden;
+	position: absolute;
+}
+
+#link:hover > .hover_text{
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	font-size: .85em;
+	visibility:visible;
+	text-align: center;
+	width: 125px;
+	top: 160px;
+	left: 220px;
+	background-color: #000000;
+	padding: .75%;
+	color: #FFFFFF;
+	word-wrap:normal;
+}
+
+#searchbar {
+	margin-top: 80px;
+	width: 1050px;
+	height: 195px;
+	background-color: #001C2F;
+	opacity:0.9;
+	filter:alpha(opacity=90); /* For IE8 and earlier */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#searchbar h1 {
+	text-align: center;
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: 300;
+	color: #1E9ED6;
+	padding-top: 1%;
+}
+
+#searchbar h2 {
+	text-align: center;
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: 400;
+	color: #F15A24;
+}
+
+#searchbar h2 input {
+	width: 40%;
+	opacity:0.5;
+	filter:alpha(opacity=50); /* For IE8 and earlier */
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	font-size: .75em;
+}
+
+#searchbar h3 {
+	text-align: center;
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: 300;
+	color: #FFFFFF;
+}
+
+#educationcheckbox {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -1%;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	color: #FFFFFF;
+	width: 960px;
+	padding-left: 5%;
+}
+
+#educationcheckbox input {
+	margin-left: 2%;
+}
+
+#FAQbutton {
+	width: 200px;
+	height: 30px;
+	padding-top: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: 300;
+	color: #001C2F;
+	background-color: #F15A24;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#FAQbutton a:hover {
+	text-decoration: none;
+	color:#FFFFFF;
+}
+
+/* These are the styles for the search results/lower section */
+
+#searchresults {
+	width: 1260px;
+	margin-top: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.activearrow {
+	position: absolute;
+	margin-left: 13.65%;
+	z-index: 2;
+	visibility:hidden;
+}
+
+.labeltab {
+	float: left;
+	height: 32px;
+	width: 40%;
+	background-color: #FFFFFF;
+	opacity:0.75;
+	filter:alpha(opacity=75); /* For IE8 and earlier */
+	border-top-right-radius:1em;
+	border-top-left-radius:1em;
+	z-index: 10;
+}
+
+.labeltab p {
+	margin-top: 5px;
+	text-align: center;
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: 300;
+	color: #1E9ED6;
+	font-size: 1.25em;
+}
+
+.resultwrapper {
+	float: left;
+	width: 400px;
+	padding-right: 1.5%
+}
+
+.resultsbox {
+	float: right;
+	width: 94%;
+	height: 63.58%;
+	padding-left: 3%;
+	padding-right: 3%;
+	background-color: #FFFFFF;
+	opacity:0.75;
+	filter:alpha(opacity=75); /* For IE8 and earlier */
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	color: #333333;
+	/*
+	overflow: scroll;
+	word-wrap: normal;
+	*/
+}
+
+/* These are the styles for all of the links */
+
+a:link {
+	text-decoration: none;
+	color:#FFFFFF;
+}
+
+a:visited {
+	text-decoration: none;
+	color:#FFFFFF;
+}
+
+a:hover {
+	text-decoration: none;
+	color:#1E9ED6;
+	font-weight: 300;
+}
+
+a:active {
+	text-decoration: none;
+	color:#F15A24;
+	font-weight: 300;
+}
+
+.active a:link  {
+	color: #F15A24;
+	text-decoration: none;
+	font-weight: 400;
+}
+
+.active a:visited {
+	color: #F15A24;
+	text-decoration: none;
+	font-weight: 400;
+}
+
+/* These are the styles specifically for the on the expert response page */
+
+
+/* Menu bar styles */
+
+#expert_menuwrapper {
+	position: absolute;
+	background-color: #001C2F;
+	opacity:0.9;
+	filter:alpha(opacity=90); /* For IE8 and earlier */
+	height: 57px;
+	padding-top: .5%;
+	padding-left: auto;
+	padding-right: auto;
+	width: 100%;
+	top: 0;
+	left: 65px;
+	margin: 0 auto;
+	z-index: -1;
+}
+
+#sidebar {
+	position: absolute;
+	background-color: #001C2F;
+	opacity:0.9;
+	filter:alpha(opacity=90); /* For IE8 and earlier */
+	height: 100%;
+	padding-left: 8px;
+	width: 57px;
+	top: 0;
+	left: 0;
+	margin-bottom: auto;
+}
+
+#sidebar_menu img {
+	margin-top: 5px;
+}
+
+#sidebar_menu {
+	height: auto;
+}
+
+/* Inbox Styles */
+
+#inbox {
+	float: left;
+	width: 400px;
+	margin-left: 57px;
+	margin-top: 24px;
+	z-index: 2;
+}
+
+#inboxmessages {
+	height: 94.7%;
+}
+
+#inboxtab {
+	opacity:1;
+}
+
+/* Preview Box Styles */
+
+#preview {
+	margin-top: 24px;
+	float: left;
+	width: 60%;
+	margin-left: 3%;
+}
+
+#previewtab {
+	width: 175px;
+	z-index: 2;
+	background-color: #666666;
+}
+
+#previewtab p {
+	color: #FFFFFF;
+}
+
+#previewbackground {
+	background-color: rgba(102,102,102,0.75);;
+	opacity: 1;
+	height: 70%;
+	z-index: 2;
+	float: left;
+	width: 100%;
+	padding-left: 1.5% !important;
+	padding-right: 1.5% !important;
+}
+
+/* Information Box */
+
+#informationtab {
+	background-color: #F15A24;
+	width: 175px;
+	opacity:1;
+	z-index: 3;
+}
+
+#informationtab p {
+	color: #FFFFFF;
+}
+
+#informationbox {
+	background-color: #F15A24;
+	opacity: 1.0 !important;
+	height: 75%;
+}
+
+#informationwrapper{
+	margin-top: 10px;
+	float: left;
+	width: 50%;
+	height: 35%;
+}
+
+/* Inquiry Box */
+
+#inquirytab {
+	background-color: #3FA9F5;
+	width: 175px;
+	opacity: 1.0 !important;
+	z-index: 3;
+}
+
+#inquirytab p {
+	color: #FFFFFF;
+}
+
+#inquirybox {
+	background-color: #3FA9F5;
+	opacity: 1.0 !important;
+	height: 75%;
+}
+
+#inquirywrapper{
+	margin-top: 10px;
+	float: left;
+	width: 50%;
+	height: 35%;
+}
+
+.messagebox {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 600;
+	font-size: 1.1em;
+	color: #1A1A1A;
+}
+
+/* Tabbed Responses */
+
+#tabbedresponses {
+	clear: both;
+	background-color: #FFFFFF;
+	opacity: 1 !important;
+	width: 100%;
+	height: 44%;
+	margin-top: -30%;
+}
+
+/* Buttons */
+
+#buttonsmenu {
+	margin-top: 2%;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.responsebutton {
+	background-color: #001C2F;
+	color: #FFFFFF;
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: 300;
+	float: left;
+	width: 23%;
+	border: none;
+	font-size: 1.25em;
+	margin-right: 2%;
+	padding-top: 27px;
+	padding-bottom: 27px;
+}
+
+.responsebutton:hover {
+	color: #F15A24;
+}
+
+#badquestion {
+	margin-right: 0 !important;
+	width: 25% !important;
+	padding-top: 27px !important;
+	padding-bottom: 27px !important;
+}
+
+/* Bottom User Info Box */
+
+#userinfo {
+	margin-top: 1%;
+	float: left;
+	width: 101%;
+	margin-left: .25%;
+	height: 20%;
+	background-color: rgba(102,102,102,0.75);;
+	padding: 1%;
+}
+
+#nameandposition {
+	float: left;
+	height: 100%;
+}
+
+#username {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	font-size: 1.45em;
+	color: #1A1A1A;
+}
+
+#usertitle {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 600;
+	font-size: 1.1em;
+	color: #FFFFFF;
+}
+
+#expertresponse {
+	float: left;
+	color: #FFFFFF;
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: 300;
+	font-size: 1.20em;
+	width: 40%;
+	margin-left: 13%;
+}
+
+.expertdescript {
+	float: left;
+	margin-top: 15px;
+}
+
+.expertbutton {
+	float: left;
+	background-color: #3FA9F5;
+	margin-left: 3%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 15%;
+	padding-right: 15%;
+}
+
+#topblock {
+	margin-top: 0px !important;
+	padding-top: 0px !important;
+	margin-bottom: 15px;
+}
+
+.responseblock {
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#bottomblock {
+	margin-top: 90px !important;
+}
+
+#contactadmin {
+	float: right;
+	margin-right: 0;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
