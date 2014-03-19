@@ -1,0 +1,6 @@
+ID	NAME	ALIAS
+1	Premium	
+2	Great	
+3	Good	
+4	Not Recommended	
+NULL	NULL	NULL

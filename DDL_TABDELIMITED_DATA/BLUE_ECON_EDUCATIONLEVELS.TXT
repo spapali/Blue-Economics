@@ -1,0 +1,10 @@
+ID	NAME	SCORE	ALIAS
+1	Less than high school	4	Lessthanhighschool
+2	High school	3	Highschooldiplomaorequivalent
+3	"Some college, no degree"	2	Somecollegenodegree
+4	Associate's degree	1	Associatesdegree
+5	Bachelor's degree	0	Bachelorsdegree
+6	Master's degree	0	Mastersdegree
+7	Doctoral or professional degree	0	Doctoralorprofessionaldegree
+8	"Post Secondary, Non Degree Award"	0	Postsecondarynondegreeaward
+9	Typical level of education that most workers need to enter this occupation.	0	Typical level of education that most workers need to enter this occupation.

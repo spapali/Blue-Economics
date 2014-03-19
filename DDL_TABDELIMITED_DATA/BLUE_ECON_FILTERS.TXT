@@ -1,0 +1,38 @@
+ID	CATEGORY	NAME	QUANTITY	ORDER	FILTERID
+1	Education	Less than high school	26	1	1
+2	Education	High school	99	1	2
+3	Education	"Some college, no degree"	3	1	3
+4	Education	Associate's degree	31	1	4
+5	Education	Bachelor's degree	98	1	5
+6	Education	Master's degree	20	1	6
+7	Education	Doctoral or professional degree	15	1	7
+8	Education	"Post Secondary, Non Degree Award"	18	1	8
+9	Education	Typical level of education that most workers need to enter this occupation.	30	1	9
+10	Work Experience	1 to 5 Years	29	2	1
+11	Work Experience	Less than 1 Year	3	2	2
+12	Work Experience	More than 5 Years	9	2	3
+13	Work Experience	"Work experience that is commonly considered necessary by employers, or is a commonly accepted substitute for more formal types of training or education"	15	2	4
+14	Work Experience	None	284	2	5
+15	Industry	Management Occupations	26	3	1
+16	Industry	Business and Financial Operations Occupations	16	3	2
+17	Industry	Computer and Mathematical Occupations	12	3	3
+18	Industry	Architecture and Engineering Occupations	29	3	4
+19	Industry	"Life, Physical, and Social Science Occupations"	30	3	5
+20	Industry	Community and Social Service Occupations	8	3	6
+21	Industry	Legal Occupations	4	3	7
+22	Industry	"Education, Training, and Library Occupations"	15	3	8
+23	Industry	"Arts, Design, Entertainment, Sports, and Media Occupations"	26	3	9
+24	Industry	Healthcare Practitioners and Technical Occupations	35	3	10
+25	Industry	Healthcare Support Occupations	9	3	11
+26	Industry	Protective Service Occupations	6	3	12
+27	Industry	Food Preparation and Serving Related Occupations	6	3	13
+28	Industry	Building and Grounds Cleaning and Maintenance Occupations	4	3	14
+29	Industry	Personal Care and Service Occupations	8	3	15
+30	Industry	Sales and Related Occupations	11	3	16
+31	Industry	Office and Administrative Support Occupations	15	3	17
+32	Industry	"Farming, Fishing, and Forestry Occupations"	4	3	18
+33	Industry	Construction and Extraction Occupations	23	3	19
+34	Industry	"Installation, Maintenance, and Repair Occupations"	17	3	20
+35	Industry	Production Occupations	23	3	21
+36	Industry	Transportation and Material Moving Occupations	13	3	22
+NULL	NULL	NULL	NULL	NULL	NULL

@@ -1,0 +1,7 @@
+ID	NAME	ALIAS
+1	1 to 5 Years	1to5years
+2	Less than 1 Year	Lessthan1year
+3	More than 5 Years	Morethan5years
+4	"Work experience that is commonly considered necessary by employers, or is a commonly accepted substitute for more formal types of training or education"	"Work experience that is commonly considered necessary by employers, or is a commonly accepted substitute for more formal types of training or education."
+5	None	None
+NULL	NULL	NULL

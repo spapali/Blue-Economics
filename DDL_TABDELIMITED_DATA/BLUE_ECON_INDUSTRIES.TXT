@@ -1,0 +1,25 @@
+ID	NAME	CODE
+1	Management Occupations	11
+2	Business and Financial Operations Occupations	13
+3	Computer and Mathematical Occupations	15
+4	Architecture and Engineering Occupations	17
+5	"Life, Physical, and Social Science Occupations"	19
+6	Community and Social Service Occupations	21
+7	Legal Occupations	23
+8	"Education, Training, and Library Occupations"	25
+9	"Arts, Design, Entertainment, Sports, and Media Occupations"	27
+10	Healthcare Practitioners and Technical Occupations	29
+11	Healthcare Support Occupations	31
+12	Protective Service Occupations	33
+13	Food Preparation and Serving Related Occupations	35
+14	Building and Grounds Cleaning and Maintenance Occupations	37
+15	Personal Care and Service Occupations	39
+16	Sales and Related Occupations	41
+17	Office and Administrative Support Occupations	43
+18	"Farming, Fishing, and Forestry Occupations"	45
+19	Construction and Extraction Occupations	47
+20	"Installation, Maintenance, and Repair Occupations"	49
+21	Production Occupations	51
+22	Transportation and Material Moving Occupations	53
+23	Military Specific Occupations	55
+NULL	NULL	NULL
