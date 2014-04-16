@@ -10,9 +10,9 @@ $view = $app->view();
 $view->setTemplatesDirectory('./');
 
 // Define mysql connector
-// TODO: pull user:password out of config file
+// TODO: pull user:password out of ini file
 $app->container->singleton('mysql', function () {
-    return new PDO('mysql:host=127.0.0.1;dbname=BlueEconomics', $db_user, $db_pass);
+     return new PDO('mysql:host=127.0.0.1;dbname=BlueEconomics', $GLOBALS['db_user'], $GLOBALS['db_pass']);
 });
 
 // main page
@@ -29,6 +29,7 @@ $app->get('/api', function () use ($app) {
  
     foreach($res as $row){
         echo $row->Name;
+        echo "<br>";
     };
 
 });
