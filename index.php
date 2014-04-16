@@ -1,7 +1,7 @@
 <?php
 
 require 'vendor/autoload.php';
-
+include '../mysql_config.php';
 $app = new \Slim\Slim();
 
 // TODO: move index.html into the /views directory and
@@ -12,7 +12,7 @@ $view->setTemplatesDirectory('./');
 // Define mysql connector
 // TODO: pull user:password out of config file
 $app->container->singleton('mysql', function () {
-    return new PDO('mysql:host=127.0.0.1;dbname=BlueEconomics', 'user', 'password');
+    return new PDO('mysql:host=127.0.0.1;dbname=BlueEconomics', $db_user, $db_pass);
 });
 
 // main page
