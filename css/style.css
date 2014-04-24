@@ -263,11 +263,16 @@ html {
 	font-family: 'Raleway', sans-serif;
 	font-weight: 300;
 	color: #333333;
-	/*
 	overflow: scroll;
 	word-wrap: normal;
-	*/
+
 }
+/*
+.resultsbox span {
+	background-color: #F15A24;
+	padding-left: auto;
+	padding-right: auto;
+}*/
 
 /* These are the styles for all of the links */
 

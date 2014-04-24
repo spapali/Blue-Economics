@@ -2,9 +2,21 @@
 <head>
 <title>Ascend NYC - Find New Jobs Here</title>
 <link rel="stylesheet" type="text/css" href="../css/style.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+	$.ajax({url:"/industries",success:function(result){
+		$("#box1 .resultsbox").html(result);
+	}});
+	$.ajax({url:"/jobs",success:function(result){
+		$("#box2 .resultsbox").html(result);
+	}});
+});
+</script>
 <style>
 html { 
-  background: url(../jobsbackground.jpg) no-repeat center center fixed; 
+  background: url(../media/images/jobsbackground.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
