@@ -38,15 +38,15 @@ $app->get('/api', function () use ($app) {
 // industry example
 $app->get('/industries', function () use ($app) {
     $mysql = $app->mysql;
-    $handler = $mysql->prepare("SELECT * FROM `industries`");
+    $handler = $mysql->prepare("SELECT * FROM `industries` ORDER BY `Name`");
     $handler->execute();
     $res = $handler->fetchAll(PDO::FETCH_OBJ);
  
     foreach($res as $row){
-        echo "<span>";
-        echo $row->Name;
-        echo "</span>";
-        echo "<br>";
+        echo "<a href=\"#\" onclick=\"return loadJob(";
+        echo $row->Id;
+        echo ")\" style=\"color:#333333;\">" . $row->Name . "</a>";
+        echo "<br />";
     };
 
 });
@@ -54,15 +54,35 @@ $app->get('/industries', function () use ($app) {
 // jobs example
 $app->get('/jobs', function () use ($app) {
     $mysql = $app->mysql;
-    $handler = $mysql->prepare("SELECT * FROM `occupations`");
-    $handler->execute();
-    $res = $handler->fetchAll(PDO::FETCH_OBJ);
- 
-    foreach($res as $row){
+    
+    if (empty($_GET)) {
+        $handler = $mysql->prepare("SELECT * FROM `occupations` ORDER BY `Name`");
+        $handler->execute();
+        $res = $handler->fetchAll(PDO::FETCH_OBJ);
+    } else {
+        $industry = intval($_GET['industry']);
+        $handler = $mysql->prepare("SELECT * FROM `occupations` WHERE `IndustryId` = '".$industry."' ORDER BY `Name`");
+        $handler->execute();
+        $res = $handler->fetchAll(PDO::FETCH_OBJ);
+    };
+    
+    $list = array();
+    $x = 0;
+    
+    foreach ($res as $item) {
+        $list[$x] = $item->Name;
+        $x++;
+    };
+
+    $new_array = array_unique($list);
+        
+    foreach($new_array as $row){
+
         echo "<span>";
-        echo $row->Name;
+        echo $row;
         echo "</span>";
         echo "<br>";
+    
     };
 
 });
