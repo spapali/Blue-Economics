@@ -78,12 +78,26 @@ $app->get('/jobs', function () use ($app) {
         
     foreach($new_array as $row){
 
-        echo "<span>";
-        echo $row;
-        echo "</span>";
+        echo "<a href=\"#\" onclick=\"return loadJobDetails('".$row."')\" style=\"color:#333333;\">" . $row . "</a>";
         echo "<br>";
     
     };
+
+});
+
+// jobs example
+$app->get('/job_description', function () use ($app) {
+    
+    $job = rawurldecode($_SERVER["QUERY_STRING"]);
+//    echo $job;
+
+    $mysql = $app->mysql;
+
+    $handler = $mysql->prepare('SELECT * FROM `occupations` WHERE `Name` = "'.$job.'"');
+    $handler->execute();
+    $res = $handler->fetchAll(PDO::FETCH_OBJ);
+
+    echo $res->Description;
 
 });
 

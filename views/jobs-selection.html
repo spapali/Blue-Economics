@@ -10,17 +10,23 @@
 				$("#box2 .resultsbox").html(result);
 			}});
   		};
-  		
-  		
+  	</script>
+  	<script>	
+  		function loadJobDetails(job) {
+  			alert(job);
+			$.ajax({url:"/job_description?"+job,success:function(result){
+				$("#box3 .resultsbox").html(result);
+			}});
+  		};
 	</script>
 
 	<script>
 		$(document).ready(function(){
-			$.ajax({url:"/industries",success:function(result){
-				$("#box1 .resultsbox").html(result);
-			}});
 			$.ajax({url:"/jobs",success:function(result){
 				$("#box2 .resultsbox").html(result);
+			}});
+			$.ajax({url:"/industries",success:function(result){
+				$("#box1 .resultsbox").html(result);
 			}});
 		});
 	</script>
