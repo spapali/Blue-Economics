@@ -9,15 +9,14 @@
 			$.ajax({url:"/jobs?industry="+industry,success:function(result){
 				$("#box2 .resultsbox").html(result);
 			}});
-  		};
+  		}
   	</script>
   	<script>	
   		function loadJobDetails(job) {
-  			alert(job);
 			$.ajax({url:"/job_description?"+job,success:function(result){
 				$("#box3 .resultsbox").html(result);
 			}});
-  		};
+  		}
 	</script>
 
 	<script>
@@ -28,6 +27,24 @@
 			$.ajax({url:"/industries",success:function(result){
 				$("#box1 .resultsbox").html(result);
 			}});
+            $('input[name="education[]"]').change(function(){
+                formData = $("#educationcheckbox").serialize();
+                //FIXME: Is this how search results should be displayed?
+                $.ajax({
+                    url: "/occupations",
+                    success: function(result) {
+                        console.log(result);
+                        $("#jobslist").children().remove();
+                        for( row in result) {
+                            html  = "<a href='#' onclick=\"return loadJobDetails('" + result[row].Name.trim() + "')\" style='color:#333333;'>" + result[row].Name.trim() + "</a><br/>"
+                            $(html).appendTo("#jobslist");
+                        }
+                    },
+                    type: "POST",
+                    dataType: "json",
+                    data: formData
+                })
+            });
 		});
 	</script>
 <style>
@@ -66,10 +83,10 @@ html {
 		</form>
 		<h3>What best describes your education level: </h3>
 		<form id="educationcheckbox">
-			<input type="checkbox" name="education" value="lessthan1">0 or less than 1 year of education
-			<input type="checkbox" name="education" value="associates">associates degree
-			<input type="checkbox" name="education" value="bachelors">bachelors degree
-			<input type="checkbox" name="education" value="advanced">advanced/graduate degree
+			<input type="checkbox" name="education[]" value="1,2,8">0 or less than 1 year of education
+			<input type="checkbox" name="education[]" value="3,4">associates degree
+			<input type="checkbox" name="education[]" value="5">bachelors degree
+			<input type="checkbox" name="education[]" value="6,7">advanced/graduate degree
 		</form>
 	</div>
 
@@ -91,7 +108,7 @@ html {
 				<p>Jobs</p>
 			</div>
 			<img src="../media/images/activearrow.png" class="activearrow" id="arrow2">
-			<div class="resultsbox">
+			<div class="resultsbox" id="jobslist">
 				<!--Results populate here-->
 			</div>
 		</div>
