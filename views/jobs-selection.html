@@ -13,9 +13,12 @@
   	</script>
   	<script>	
   		function loadJobDetails(job) {
-			$.ajax({url:"/job_description?"+job,success:function(result){
-				$("#box3 .resultsbox").html(result);
-			}});
+			$.ajax({url:"/job_description?"+job,
+				dataType:'json',
+				success:function(result){
+					$("#box3 .resultsbox").html("<span class=\"descriptor\">Name: </span>" + result.Name + "<br />" + "<span class=\"descriptor\">Description: </span>" + result.Description + "<br />" + "<span class=\"descriptor\">Median Annual Pay:</span> $" + result.MedianPayAnnual + "<br />" + "<span class=\"descriptor\">Median Hourly Pay:</span> $" + result.MedianPayHourly + "/Hour <br />" + "<span class=\"descriptor\">Employment Openings: </span>" + result.EmploymentOpenings);
+				}
+			});
   		}
 	</script>
 

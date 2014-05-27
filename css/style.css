@@ -267,6 +267,12 @@ html {
 	word-wrap: normal;
 
 }
+
+.descriptor {
+	opacity: 1 !important;
+	font-weight: 900 !important;
+}
+
 /*
 .resultsbox span {
 	background-color: #F15A24;
