@@ -10798,6 +10798,8 @@ CREATE TABLE `industries` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
+CREATE FULLTEXT INDEX ft_idx_name on industries(Name);
+
 --
 -- Dumping data for table `industries`
 --
@@ -10874,6 +10876,9 @@ CREATE TABLE `occupations` (
   KEY `IX_WorkExperienceId` (`WorkExperienceId`),
   KEY `IX_EducationLevelId` (`EducationLevelId`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=341 ;
+
+
+CREATE FULLTEXT INDEX ft_idx_descr on occupations(Name, Description);
 
 --
 -- Dumping data for table `occupations`
