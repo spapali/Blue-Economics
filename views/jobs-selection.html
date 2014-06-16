@@ -22,6 +22,28 @@
   		}
 	</script>
 
+	 <script>
+	 $(document).ready(function(){
+  		$( "form:first" ).submit(function() {
+  			event.preventDefault();
+  			var mydata = $(this).serialize();
+  			unserializeddata = mydata.slice(9);
+  			alert(unserializeddata);
+  			$("#jobslist").children().remove();
+  			$.ajax({url:"/search/"+unserializeddata,
+				dataType:'json',
+				success:function(result){
+					$("#jobslist").html(result.jobs[1].name);
+				},
+				error:function(xhr, textStatus, errorThrown){
+					alert("Something didn't work");
+				}
+			});
+
+		});
+	});
+	</script>
+
 	<script>
 		$(document).ready(function(){
 			$.ajax({url:"/jobs",success:function(result){
@@ -82,7 +104,7 @@ html {
 		<a id="link" href="http://blueecon.com/"><img id="blueeconlogo" src="../media/images/blueecon_logo.png"><span class="hover_text">A description of Blue Economics will go here</span></a>
 		<h1>Find New Jobs Here</h1>
 		<form>
-			<h2>What Job Are You Looking For: <input type="text" name="search" value="type what you are looking for here"></h2>
+			<h2>What Job Are You Looking For: <input type="text" name="mySearch" id="searchBox" value="type what you are looking for here"></h2>
 		</form>
 		<h3>What best describes your education level: </h3>
 		<form id="educationcheckbox">
