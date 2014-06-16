@@ -19,13 +19,6 @@
 			z-index: 0 !important;
 			padding: 0;
 			margin: 0;
-			background: url(/media/images/Video_02-1080-Filter2.jpg) 
-			no-repeat center center fixed; 
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-			background-size: cover;
-			}
 		}
 		
 		#bigvideobackground video {
@@ -53,7 +46,7 @@
 			position: absolute;
 			left: 0;
 			right: 0;
-			top: 95%;
+			top: 95.5%;
 			margin-left: auto;
 			margin-right: auto;
 			font-family: 'Merriweather Sans', sans-serif;
@@ -86,6 +79,8 @@
 			float: right;
 			padding-left: 5px;
 			padding-right: 10px;
+			-webkit-transform: translateZ(2);
+			z-index: 2 !important;
 		}	
 		
 		@media only screen and (min-width:556px) and (max-width:771px) {
@@ -210,18 +205,32 @@
 		}
 	</style>
 
-    	<link href='http://fonts.googleapis.com/css?family=Lato|Oswald|Merriweather+Sans|Raleway' rel='stylesheet' type='text/css'>
-    	
+    <link href='http://fonts.googleapis.com/css?family=Lato|Oswald|Merriweather+Sans|Raleway' rel='stylesheet' type='text/css'>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://scrolldjs.com/demo/js/scrolld.min.js"></script>
+	<script type="text/javascript" src="/js/external/bower_components/video.js/video.js"></script>
+	<script type="text/javascript" src="/js/external/bower_components/BigVideo.js/lib/bigvideo.js"></script>
+	<script type="text/javascript">
+		videoElement.addEventListener('canplay', function() { this.play(); } );
+	</script>
 </head>
 
 <body>
 	<div id="bigvideobackground">
-		<video width="auto" height="120%" loop autoplay muted poster="Video_02-1080-Filter2.jpg" preload="none">
+		<video width="auto" height="120%" loop autoplay="autoplay" muted poster="/media/images/Video_02-1080-Filter2.jpg" preload="none">
 			<source src="/media/movies/Video_02-1080-Filter2.webm" type="video/webm">
 			<source src="/media/movies/Video_02-1080-Filter2.ogv" type="video/ogg">
 			<source src="/media/movies/Video_02-1080-Filter2.m4v" type="video/mp4">
 				Your browser does not support the video tag.
 		</video>
+		<!--<script>
+			$(function() {
+				var BV = new $.BigVideo({useFlashForFirefox:false});
+				BV.init();
+				BV.show('/media/movies/Video_02-1080-Filter2.webm', {altSource:'/media/movies/Video_02-1080-Filter2.ogv'}, {ambient:true});
+			});
+		</script>-->
 	</div>
 	<div id="layover">
 		<div id="welcome">
@@ -240,14 +249,12 @@
 	<div id="about_section" class="about_sectionBtn">
 		<div id="what_we_do">
 			<h2>what we do</h2>
-			<p>The ASCEND Project is a partnership between Blue Economics, SOBRO and Abyssinian Development Corp to provide the residents of NYC help to 												find a better job or career and start new businesses and expand existing ones. Users will find government data about different job types and future outlooks, real feedback and answers from experts, online courses, links to additional resources and contacts to government agencies and non-profits at no cost. As a living project, feedback from users will help grow the content on the site.</p>
+			<p>The ASCEND Project is a partnership between Blue Economics, SOBRO and Abyssinian Development Corp to provide the residents of NYC help to find a better job or career and start new businesses and expand existing ones. Users will find government data about different job types and future outlooks, real feedback and answers from experts, online courses, links to additional resources and contacts to government agencies and non-profits at no cost. As a living project, feedback from users will help grow the content on the site.</p>
 			<p>The ASCEND Project is developed by <a href="http://blueecon.com/">Blue Economics</a>.</p>
 			<p>Blue Economics is a professional volunteer organization that was founded in 2010 with the idea that people can come together and use their talents to uplift their communities. BE leverages the skills, experiences, knowledge, and networks of its members to develop solutions to issues and problems that facilitate the economic advancement of individuals and communities.</p>
 			<p>Blue Economics is partnering with the below agencies to bring the ASCEND Project to life.</p>
 	</div>
 	
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://scrolldjs.com/demo/js/scrolld.min.js"></script>
 	<script type="text/javascript">
 		$("[id*='Btn']").stop(true).on('click',function(e){e.preventDefault();$(this).scrolld();})
 	</script>
