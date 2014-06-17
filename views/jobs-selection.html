@@ -28,12 +28,18 @@
   			event.preventDefault();
   			var mydata = $(this).serialize();
   			unserializeddata = mydata.slice(9);
-  			alert(unserializeddata);
-  			$("#jobslist").children().remove();
   			$.ajax({url:"/search/"+unserializeddata,
 				dataType:'json',
 				success:function(result){
-					$("#jobslist").html(result.jobs[1].name);
+					isitempty = result.jobs.length;
+					if (isitempty == 0) {
+						alert("Your search had no results");
+					}
+					$("#jobslist").children().remove();
+					$.each(result.jobs, function(i, item) {
+						html  = "<a href='#' onclick=\"return loadJobDetails('" + item.name + "')\" style='color:#333333;'>" + item.name + "</a><br/>";
+						$("#jobslist").append(html);
+					});
 				},
 				error:function(xhr, textStatus, errorThrown){
 					alert("Something didn't work");
