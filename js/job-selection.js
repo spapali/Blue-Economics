@@ -76,3 +76,19 @@ $(document).ready(function(){
 		})
 	});
 });
+
+
+$(document).ready(function(){
+	$("#clearbutton").addClass("makeinvisible");
+    $("#searchBox").mouseover(function(){
+		$("#clearbutton").removeClass("makeinvisible");
+		$("#clearbutton").addClass("makevisible");
+    });
+    $("#searchBox").mouseout(function(){
+		$("#clearbutton").removeClass("makevisible");
+		$("#clearbutton").addClass("makeinvisible");
+    });
+    $("#clearbutton").click(function(){
+    	$("#searchBox").val('');
+    });
+});
