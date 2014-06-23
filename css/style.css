@@ -132,6 +132,29 @@ html {
 	word-wrap:normal;
 }
 
+#clear_text {
+	position: absolute;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	font-size: .85em;
+	text-align: center;
+	width: 125px;
+	top: 183px;
+	left: 1150px;
+	background-color: #000000;
+	padding: .75%;
+	color: #FFFFFF;
+	word-wrap:normal;
+}
+
+.clear_button_hover_text {
+	visibility: hidden;
+}
+
+.clear_button_show {
+	visibility: visible !important;
+}
+
 #searchbar {
 	margin-top: 80px;
 	width: 1050px;

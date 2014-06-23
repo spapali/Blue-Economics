@@ -79,16 +79,42 @@ $(document).ready(function(){
 
 
 $(document).ready(function(){
+	//Hides clear button
 	$("#clearbutton").addClass("makeinvisible");
-    $("#searchBox").mouseover(function(){
+	//Hides clear button description
+	$("#clear_text").addClass("clear_button_hover_text");
+	//Shows clears button when mouse hovers over top box
+    $("#searchbar").mouseover(function(){
 		$("#clearbutton").removeClass("makeinvisible");
 		$("#clearbutton").addClass("makevisible");
     });
-    $("#searchBox").mouseout(function(){
+    //Hides button when mouse leaves top box
+    $("#searchbar").mouseout(function(){
 		$("#clearbutton").removeClass("makevisible");
 		$("#clearbutton").addClass("makeinvisible");
     });
+    //Clear input box when clear button is clicked
     $("#clearbutton").click(function(){
     	$("#searchBox").val('');
+    });
+    //Clears input box when input box is clicked
+    $("#searchBox").click(function(){
+    	$("#searchBox").val('');
+    });
+    //If input box is empty when mouse leaves top box, it fills it
+    $("#searchbar").mouseout(function(){
+    	if($($.trim("#searchBox")).val()=="") {
+    		$("#searchBox").val("type what you are looking for here");
+    	}
+    });
+    //Shows clear button description on mouse hover
+    $("#clearbutton").mouseover(function(){
+    	$("#clear_text").removeClass("clear_button_hover_text");
+    	$("#clear_text").addClass("clear_button_show");
+    });
+    //Hides clear button description when mouse out
+    $("#clearbutton").mouseout(function(){
+    	$("#clear_text").removeClass("clear_button_show");
+    	$("#clear_text").addClass("clear_button_hover_text");
     });
 });
