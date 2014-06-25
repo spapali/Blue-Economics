@@ -32,7 +32,7 @@ $(document).ready(function(){
 				console.log(result);
 				var arr = [];
 				$.each(result.jobs, function(i, item) {
-					html  = "<a href='#' onclick=\"return loadJobDetails('" + item.name + "')\" style='color:#333333;'>" + item.name + "</a><br/>";
+					html  = "<a href='#' onclick=\"return loadJobDetails('" + item.name + "')\" class=\"selectable_result\">" + item.name + "</a><br/>";
 					console.log(html);
 					//arr.push(html);
 					$("#jobslist").append(html);
@@ -66,7 +66,7 @@ $(document).ready(function(){
 				console.log(result);
 				$("#jobslist").children().remove();
 				for( row in result) {
-					html  = "<a href='#' onclick=\"return loadJobDetails('" + result[row].Name.trim() + "')\" style='color:#333333;'>" + result[row].Name.trim() + "</a><br/>"
+					html  = "<a href='#' onclick=\"return loadJobDetails('" + result[row].Name.trim() + "')\" class=\"selectable_result\">" + result[row].Name.trim() + "</a><br/>"
 					$(html).appendTo("#jobslist");
 				}
 			},
@@ -117,4 +117,22 @@ $(document).ready(function(){
     	$("#clear_text").removeClass("clear_button_show");
     	$("#clear_text").addClass("clear_button_hover_text");
     });
+});
+
+$(document).ready(function(){
+	$("#menu_button").mouseover(function(){
+		$("#menuwrapper ul").addClass("makevisible");
+		$("#menu_button").addClass("makeinvisible");
+	});
+	$("#menuwrapper ul").mouseover(function(){
+		$("#menuwrapper ul").addClass("makevisible");
+		$("#menu_button").addClass("makeinvisible");
+	});
+	$("#menuwrapper li").mouseover(function(){
+		$("#menu_button").addClass("makeinvisible");
+	});
+	$("#menuwrapper ul").mouseout(function(){
+		$("#menuwrapper ul").removeClass("makevisible");
+		$("#menu_button").removeClass("makeinvisible");
+	});
 });

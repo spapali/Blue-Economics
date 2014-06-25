@@ -50,7 +50,7 @@ $app->get('/industries', function () use ($app) {
     foreach($res as $row){
         echo "<a href=\"#\" onclick=\"return loadJob(";
         echo $row->Id;
-        echo ")\" style=\"color:#333333;\">" . $row->Name . "</a>";
+        echo ")\" class=\"selectable_result\">" . $row->Name . "</a>";
         echo "<br />";
     };
 
@@ -62,7 +62,7 @@ $app->get('/jobs', function () use ($app) {
     $res = empty($_GET) ? executeSql("SELECT DISTINCT Name FROM occupations ORDER BY Name") : executeSql("SELECT DISTINCT Name FROM occupations WHERE IndustryId = :industry ORDER BY Name", array(':industry' => $industry));
     foreach($res as $entry) {        
         $row = $entry->Name;
-        echo "<a href=\"#\" onclick=\"return loadJobDetails('$row')\" style=\"color:#333333;\">$row</a>";
+        echo "<a href=\"#\" onclick=\"return loadJobDetails('$row')\" class=\"selectable_result\">$row</a>";
         echo "<br>";    
     };
 });

@@ -17,6 +17,11 @@ html {
 	margin-right: auto;
 }
 
+#menu_button {
+	position: absolute;
+	visibility: hidden;
+	color: #F15A24 !important;
+}
 
 #menu {
 	width: 1050px;
@@ -77,7 +82,7 @@ html {
 	text-align: center;
 	width: 125px;
 	top: 183px;
-	left: 1150px;
+	left: 77%;
 	background-color: #000000;
 	padding: .75%;
 	color: #FFFFFF;
@@ -209,13 +214,33 @@ html {
 	}
 
 	#menu {
+		width: 1050px;
 		padding-left: 5.5% !important;
 	}
 }
 
-@media only screen and (min-width:800px) and (max-width:1059px) {
-	#searchbar{
+@media only screen and (min-width:811px) and (max-width:1059px) {
+	#blueeconlogo {
+		width: 95px;
+		height: auto;
+	}
+
+	#searchbar {
 		width: 800px;
+		height: 175px;
+		margin-top: 75px;
+	}
+
+	#searchbar h1 {
+		font-size: 1.75em;
+	}
+
+	#searchbar h2 {
+		font-size: 1.5em;
+	}
+
+	#searchbar h3 {
+		font-size: 1em;
 	}
 
 	#educationcheckbox {
@@ -232,18 +257,151 @@ html {
 	}
 
 	.labeltab {
-		width: 60% !important;
+		width: 50% !important;
+		height: 28px !important;
+	}
+
+	.labeltab p {
+		font-size: 1.15em !important;
+	}
+
+	#homeimage {
+		width: 45px; 
+		height: auto;
 	}
 
 	#menu {
 		width: 800px !important;
-		padding-left: 1% !important;
+		padding-left: 0 !important;
 		white-space: nowrap;
+	}
+
+	#menuwrapper {
+		height: 50px;
 	}
 
 	#menuwrapper li {
 		padding-left: 2%;
-		word-wrap: break-word;
+		font-size: .75em;
+	}
+
+	.selectable_result {
+		font-size: .9em;
+	}
+
+	#box3 .resultsbox {
+		font-size: .9em;
+	}
+}
+
+@media only screen and (max-width: 810px) {
+	#searchbar {
+		width: 320px;
+		height: 400px;
+		z-index: 1;
+		position: relative;
+	}
+
+	#searchbar h1 {
+		font-size: 1.9em;
+	}
+
+	#searchbar h2 {
+		font-size: 1.25em;
+	}
+
+	#searchbar h3 {
+		font-size: 1em !important;
+	}
+	#searchBox {
+		width: 275px !important;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#searchresults {
+		width: 320px !important;
+	}
+
+	.resultwrapper {
+		float: left !important;
+		width: 100% !important;
+		margin-bottom: 15px;
+	}
+
+	.resultsbox {
+		height: 40% !important;
+	}
+
+	#blueeconlogo {
+		position: relative;
+		display: block;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		width: 95px;
+		height: auto;
+		z-index: 1;
+	}
+
+	#educationcheckbox {
+		font-size: .9em;
+		width: 265px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.education_input {
+		float: left;
+		white-space: nowrap;
+		padding-bottom: 10px;
+	}
+
+	#menu {
+		width: 320px;
+	}
+
+	#menu_button {
+		top: 0;
+		text-align: right;
+		float: right;
+		visibility: visible !important;
+		position: relative !important;
+		z-index: 0;
+	}
+
+	#menu_button:hover {
+		color: #001C2F !important;
+	}
+
+	#menuwrapper ul {
+		width: 230px;
+		background-color: #001C2F;
+		z-index: 999 !important;
+		height: auto;
+		float: right;
+		padding-right: 15px;
+		visibility: hidden;
+		margin-top: -30px;
+		position: relative;
+	}
+
+	#menuwrapper li {
+		display: block !important;
+		z-index: 11 !important;
+		width: 220px !important;
+		padding-left: 0 !important;
+		margin-left: 0 !important;
+		padding-bottom: 20px;
+		white-space: nowrap;
+	}
+
+	#clear_text {
+		left: 65%;
+		top: 280px;
+	}
+
+	#link:hover > .hover_text {
+		left: 35%;
 	}
 }
 
@@ -296,6 +454,7 @@ html {
 	height: 63.58%;
 	padding-left: 3%;
 	padding-right: 3%;
+	padding-top: 3%;
 	background-color: #FFFFFF;
 	opacity:0.75;
 	filter:alpha(opacity=75); /* For IE8 and earlier */
@@ -312,12 +471,16 @@ html {
 	font-weight: 900 !important;
 }
 
-/*
-.resultsbox span {
-	background-color: #F15A24;
-	padding-left: auto;
-	padding-right: auto;
-}*/
+.selectable_result {
+	color: #333333 !important;
+}
+
+.selectable_result:hover {
+	background-color: #F15A24 !important;
+	color: #FFFFFF !important;
+	opacity: 1 !important;
+	filter:alpha(opacity=100); /* For IE8 and earlier */
+}
 
 /* These are the styles for all of the links */
 
