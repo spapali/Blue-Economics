@@ -1,0 +1,12 @@
+<configuration xmlns="http://logging.apache.org/log4php/">
+    <appender name="consoleAppender" class="LoggerAppenderConsole">
+        <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%date{d.m.Y H:i:s,u}|%logger|%-5level|%msg%n" />
+            <!--<param name="conversionPattern" value="%date{d.m.Y H:i:s,u}|%pid|%server{REMOTE_ADDR}:%server{REMOTE_PORT}|%logger|%-5level|%request|%msg%n" />-->
+        </layout>
+    </appender>
+    <root>
+        <level value="DEBUG" />
+        <appender_ref ref="consoleAppender" />
+    </root>
+</configuration>

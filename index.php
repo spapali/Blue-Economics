@@ -3,8 +3,44 @@
 require 'vendor/autoload.php';
 
 $app = new \Slim\Slim(array(
-    'log.enabled' => true
+    // change to 'development' for testing
+    'mode' => 'production'
 ));
+
+// Only invoked if mode is "production"
+$app->configureMode('production', function () use ($app) {
+    $app->config(array(
+        'log.enable' => false,
+        'debug' => false,
+        'config.path' => 'config/prod/'
+    ));
+});
+
+// Only invoked if mode is "development"
+$app->configureMode('development', function () use ($app) {
+    $app->config(array(
+        'log.enable' => false,
+        'debug' => true,
+        'config.path' => 'config/dev/'
+    ));
+});
+
+// Define mysql connector
+$app->container->singleton('mysql', function () {
+    $app = \Slim\Slim::getInstance();
+    $config = parse_ini_file(getAppConfigFile('mysql.ini'));
+    $pdo = new PDO("mysql:host=". $config['db.hostname'].";dbname=".$config['db.schema'], $config['db.user'], $config['db.password']);
+    // set the character set to utf8 to ensure proper json encoding
+    $pdo->exec("SET NAMES 'utf8'");
+    return $pdo;
+});
+
+
+$app->container->singleton('log', function() {
+    $app = \Slim\Slim::getInstance();
+    Logger::configure(getAppConfigFile('log4php-config.xml'));
+    return Logger::getLogger('default');
+});
 
 // FIXME: Implement separation of view and data
 
@@ -15,19 +51,17 @@ $view->setTemplatesDirectory('./');
 
 function executeSql($query, array $params = array()) {
     $app = \Slim\Slim::getInstance();
-//    $app->log->info(sprintf("Executing query: %s", $query));
-//    $app->log->info(sprintf("parameters: %s", var_export($params)));
+    $app->log->debug(sprintf("Executing query: %s with params: %s", $query, json_encode($params)));
     $mysql = $app->mysql;    
     $handler = $mysql->prepare($query);
     $handler->execute($params);
     return $handler->fetchAll(PDO::FETCH_OBJ);    
 };
 
-// Define mysql connector
-$app->container->singleton('mysql', function () {
-    $config = parse_ini_file('config/mysql.ini');
-    return new PDO("mysql:host=". $config['db.hostname'].";dbname=".$config['db.schema'], $config['db.user'], $config['db.password']);
-});
+function getAppConfigFile($configFile) {
+    $app = \Slim\Slim::getInstance();
+    return sprintf("%s%s", $app->config('config.path'), $configFile);
+}
 
 // main page
 $app->get('/', function () use ($app) {
@@ -58,8 +92,7 @@ $app->get('/industries', function () use ($app) {
 
 // jobs example
 $app->get('/jobs', function () use ($app) {
-    $industry = intval($_GET['industry']);
-    $res = empty($_GET) ? executeSql("SELECT DISTINCT Name FROM occupations ORDER BY Name") : executeSql("SELECT DISTINCT Name FROM occupations WHERE IndustryId = :industry ORDER BY Name", array(':industry' => $industry));
+    $res = empty($_GET) ? executeSql("SELECT DISTINCT Name FROM occupations ORDER BY Name") : executeSql("SELECT DISTINCT Name FROM occupations WHERE IndustryId = :industry ORDER BY Name", array(':industry' => intval($_GET['industry'])));
     foreach($res as $entry) {        
         $row = $entry->Name;
         echo "<a href=\"#\" onclick=\"return loadJobDetails('$row')\" class=\"selectable_result\">$row</a>";
@@ -68,11 +101,12 @@ $app->get('/jobs', function () use ($app) {
 });
 
 // jobs example
-$app->get('/job_description', function () use ($app) {    
+$app->get('/job_description', function () use ($app) {
+    $app->response->headers->set('Content-Type', 'application/json');
     $job = rawurldecode($_SERVER["QUERY_STRING"]);
     $res = executeSql('SELECT DISTINCT Name, Description, MedianPayAnnual, MedianPayHourly, NumberOfJobs, EmploymentOpenings FROM occupations WHERE Name = :jobName', array(':jobName' => $job));
     foreach($res as $entry) {
-        echo json_encode($entry, JSON_PRETTY_PRINT);
+        $app->response->write(json_encode($entry, JSON_PRETTY_PRINT));
     }
 });
 
@@ -82,7 +116,8 @@ $app->get('/workexperience/:id', function($id) use($app) {
     foreach ($res as $entry) {
         array_push($result, array( 'id' => $id, 'name' => $entry->Name));
     }
-    echo json_encode($result);
+    $app->response->headers->set('Content-Type', 'application/json');
+    $app->response->write(json_encode($result));
 });
 
 $app->get('/workexperience', function() use($app) {
@@ -91,31 +126,35 @@ $app->get('/workexperience', function() use($app) {
     foreach($res as $entry) {
         array_push($result, array('id' => $entry->Id, 'name' => $entry->Name));        
     }
-    echo json_encode($result);
+    $app->response->headers->set('Content-Type', 'application/json');
+    $app->response->write(json_encode($result));
 });
 
 $app->get('/search/:searchQuery', function($searchQuery) use($app) {
     $result = array('industries' => [], 'jobs' => []);
 
-    // find industries
+    // find matching industries
     $query = "SELECT Id, Name FROM industries WHERE MATCH(Name) AGAINST ( '$searchQuery' )";
     $res = executeSql($query);
-    $accumulator = [];
+    $industries = [];
     foreach($res as $industry) {
-        array_push($accumulator, array( 'id' => $industry->Id, 'name' => $industry->Name));
+        $industries[$industry->Id] = array( 'id' => $industry->Id, 'name' => $industry->Name);
     }
-    $result['industries'] = $accumulator;
 
     // find matching jobs
-    $accumulator = [];
-    $query = "SELECT DISTINCT Name FROM occupations WHERE MATCH(description, name) AGAINST ( '$searchQuery' )";
+    $jobs = [];
+    $query = "SELECT DISTINCT i.Id as IndustryId, i.Name as IndustryName, o.Name as JobName FROM occupations o, industries i WHERE o.IndustryId = i.Id AND MATCH(o.Description, o.Name) AGAINST ( '$searchQuery' )";
     $res = executeSql($query);
     foreach($res as $job) {
-        array_push($accumulator, array( 'name' => $job->Name));
+        array_push($jobs, array( 'name' => $job->JobName));
+        // add job industry to industries list
+        $industries[$job->IndustryId] = array('id' => $job->IndustryId, 'name' => $job->IndustryName);
     }
-    $result['jobs'] = $accumulator;
 
-    echo json_encode($result);
+    $result = array('industries' => array_values($industries), 'jobs' => $jobs);
+
+    $app->response->headers->set('Content-Type', 'application/json');
+    $app->response->write(json_encode($result));
 });
 
 $app->post('/occupations', function() use($app) {
@@ -126,15 +165,16 @@ $app->post('/occupations', function() use($app) {
             $value = explode(",", $value);
         });
         $edLevels = implode(",", $optionArray);
-        $app->log->info(sprintf("Education levels %s", $edLevels));
-        $res = executeSql("SELECT DISTINCT Name FROM occupations WHERE  EducationLevelId in ( $edLevels )");
+        //$app->log->info(sprintf("Education levels %s", $edLevels));
+        $res = executeSql("SELECT DISTINCT Name FROM occupations WHERE  EducationLevelId in ( $edLevels ) ORDER BY Name");
     } else {
-        $res  = executeSql('SELECT DISTINCT Name FROM occupations');
+        $res  = executeSql('SELECT DISTINCT Name FROM occupations ORDER BY Name');
     } 
     foreach($res as $occupation) {
         array_push($result, (array) $occupation);
     }
-    echo json_encode($result);
+    $app->response->headers->set('Content-Type', 'application/json');
+    $app->response->write(json_encode($result));
 });
 
 $app->run();
