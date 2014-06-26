@@ -369,10 +369,6 @@ html {
 		z-index: 0;
 	}
 
-	#menu_button:hover {
-		color: #001C2F !important;
-	}
-
 	#menuwrapper ul {
 		width: 230px;
 		background-color: #001C2F;
