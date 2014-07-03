@@ -192,216 +192,6 @@ html {
 
 /* These are the styles for the search results/lower section */
 
-@media only screen and (min-width:1260px) {
-	#searchresults {
-		width: 1260px !important;
-		padding-left: none !important;
-	}
-
-	.resultwrapper {
-		width: 400px !important;
-	}
-}
-
-@media only screen and (min-width:1060px) and (max-width:1259px) {
-	#searchresults {
-		width: 1050px !important;
-		padding-left: 1% !important;
-	}
-
-	.resultwrapper {
-		width: 334px !important;
-	}
-
-	#menu {
-		width: 1050px;
-		padding-left: 5.5% !important;
-	}
-}
-
-@media only screen and (min-width:811px) and (max-width:1059px) {
-	#blueeconlogo {
-		width: 95px;
-		height: auto;
-	}
-
-	#searchbar {
-		width: 800px;
-		height: 175px;
-		margin-top: 75px;
-	}
-
-	#searchbar h1 {
-		font-size: 1.75em;
-	}
-
-	#searchbar h2 {
-		font-size: 1.5em;
-	}
-
-	#searchbar h3 {
-		font-size: 1em;
-	}
-
-	#educationcheckbox {
-		font-size: .75em;
-	}
-
-	#searchresults {
-		width: 800px !important;
-		padding-left: 2% !important;
-	}
-
-	.resultwrapper {
-		width: 253px !important;
-	}
-
-	.labeltab {
-		width: 50% !important;
-		height: 28px !important;
-	}
-
-	.labeltab p {
-		font-size: 1.15em !important;
-	}
-
-	#homeimage {
-		width: 45px; 
-		height: auto;
-	}
-
-	#menu {
-		width: 800px !important;
-		padding-left: 0 !important;
-		white-space: nowrap;
-	}
-
-	#menuwrapper {
-		height: 50px;
-	}
-
-	#menuwrapper li {
-		padding-left: 2%;
-		font-size: .75em;
-	}
-
-	.selectable_result {
-		font-size: .9em;
-	}
-
-	#box3 .resultsbox {
-		font-size: .9em;
-	}
-}
-
-@media only screen and (max-width: 810px) {
-	#searchbar {
-		width: 320px;
-		height: 400px;
-		z-index: 1;
-		position: relative;
-	}
-
-	#searchbar h1 {
-		font-size: 1.9em;
-	}
-
-	#searchbar h2 {
-		font-size: 1.25em;
-	}
-
-	#searchbar h3 {
-		font-size: 1em !important;
-	}
-	#searchBox {
-		width: 275px !important;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	#searchresults {
-		width: 320px !important;
-	}
-
-	.resultwrapper {
-		float: left !important;
-		width: 100% !important;
-		margin-bottom: 15px;
-	}
-
-	.resultsbox {
-		height: 40% !important;
-	}
-
-	#blueeconlogo {
-		position: relative;
-		display: block;
-		margin-left: auto !important;
-		margin-right: auto !important;
-		width: 95px;
-		height: auto;
-		z-index: 1;
-	}
-
-	#educationcheckbox {
-		font-size: .9em;
-		width: 265px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.education_input {
-		float: left;
-		white-space: nowrap;
-		padding-bottom: 10px;
-	}
-
-	#menu {
-		width: 320px;
-	}
-
-	#menu_button {
-		top: 0;
-		text-align: right;
-		float: right;
-		visibility: visible !important;
-		position: relative !important;
-		z-index: 0;
-	}
-
-	#menuwrapper ul {
-		width: 230px;
-		background-color: #001C2F;
-		z-index: 999 !important;
-		height: auto;
-		float: right;
-		padding-right: 15px;
-		visibility: hidden;
-		margin-top: -30px;
-		position: relative;
-	}
-
-	#menuwrapper li {
-		display: block !important;
-		z-index: 11 !important;
-		width: 220px !important;
-		padding-left: 0 !important;
-		margin-left: 0 !important;
-		padding-bottom: 20px;
-		white-space: nowrap;
-	}
-
-	#clear_text {
-		left: 65%;
-		top: 280px;
-	}
-
-	#link:hover > .hover_text {
-		left: 35%;
-	}
-}
-
-
 #searchresults {
 	width: 1050px;
 	padding-left: 1%;
@@ -411,10 +201,10 @@ html {
 }
 
 .activearrow {
-	position: absolute;
 	margin-left: 13.65%;
+	position: absolute;
 	z-index: 2;
-	visibility:hidden;
+	visibility: hidden;
 }
 
 .labeltab {
@@ -462,9 +252,26 @@ html {
 
 }
 
+.makeblue {
+	background-color: #001C2F !important;
+	opacity: 0.9 !important;
+}
+
 .descriptor {
 	opacity: 1 !important;
 	font-weight: 900 !important;
+}
+
+.makegrey {
+	color: #333333 !important;
+}
+
+.makewhite {
+	color: #ffffff !important;
+}
+
+.makeorange {
+	color: #F15A24 !important;
 }
 
 .selectable_result {
@@ -515,7 +322,6 @@ a:active {
 }
 
 /* These are the styles specifically for the on the expert response page */
-
 
 /* Menu bar styles */
 
@@ -785,4 +591,219 @@ a:active {
 	margin-right: 0;
 	padding-top: 40px;
 	padding-bottom: 40px;
+}
+
+/* Media Queries for Responsive Site */
+
+@media only screen and (min-width:1260px) {
+	#searchresults {
+		width: 1260px !important;
+		padding-left: none !important;
+	}
+
+	.resultwrapper {
+		width: 400px !important;
+	}
+}
+
+@media only screen and (min-width:1060px) and (max-width:1259px) {
+	#searchresults {
+		width: 1050px !important;
+		padding-left: 1% !important;
+	}
+
+	.resultwrapper {
+		width: 334px !important;
+	}
+
+	#menu {
+		width: 1050px;
+		padding-left: 5.5% !important;
+	}
+}
+
+@media only screen and (min-width:811px) and (max-width:1059px) {
+	#blueeconlogo {
+		width: 95px;
+		height: auto;
+	}
+
+	#searchbar {
+		width: 800px;
+		height: 175px;
+		margin-top: 75px;
+	}
+
+	#searchbar h1 {
+		font-size: 1.75em;
+	}
+
+	#searchbar h2 {
+		font-size: 1.5em;
+	}
+
+	#searchbar h3 {
+		font-size: 1em;
+	}
+
+	#educationcheckbox {
+		font-size: .75em;
+	}
+
+	#searchresults {
+		width: 800px !important;
+		padding-left: 2% !important;
+	}
+
+	.resultwrapper {
+		width: 253px !important;
+	}
+
+	.labeltab {
+		width: 50% !important;
+		height: 28px !important;
+	}
+
+	.labeltab p {
+		font-size: 1.15em !important;
+	}
+
+	#homeimage {
+		width: 45px; 
+		height: auto;
+	}
+
+	#menu {
+		width: 800px !important;
+		padding-left: 0 !important;
+		white-space: nowrap;
+	}
+
+	#menuwrapper {
+		height: 50px;
+	}
+
+	#menuwrapper li {
+		padding-left: 2%;
+		font-size: .75em;
+	}
+
+	.selectable_result {
+		font-size: .9em;
+	}
+
+	#box3 .resultsbox {
+		font-size: .9em;
+	}
+}
+
+@media only screen and (max-width: 810px) {
+	#searchbar {
+		width: 320px;
+		height: 400px;
+		z-index: 1;
+		position: relative;
+	}
+
+	#searchbar h1 {
+		font-size: 1.9em;
+	}
+
+	#searchbar h2 {
+		font-size: 1.25em;
+	}
+
+	#searchbar h3 {
+		font-size: 1em !important;
+	}
+	#searchBox {
+		width: 275px !important;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#searchresults {
+		width: 320px !important;
+	}
+
+	.resultwrapper {
+		float: left !important;
+		width: 100% !important;
+		margin-bottom: 15px;
+	}
+
+	.resultsbox {
+		height: 40% !important;
+	}
+
+	#blueeconlogo {
+		position: relative;
+		display: block;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		width: 95px;
+		height: auto;
+		z-index: 1;
+	}
+
+	#educationcheckbox {
+		font-size: .9em;
+		width: 265px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.education_input {
+		float: left;
+		white-space: nowrap;
+		padding-bottom: 10px;
+	}
+
+	#menu {
+		width: 320px;
+	}
+
+	#menu_button {
+		top: 0;
+		text-align: right;
+		float: right;
+		visibility: visible !important;
+		position: relative !important;
+		z-index: 0;
+	}
+
+	#menu_button:hover {
+		color: #001C2F !important;
+	}
+
+	#menuwrapper ul {
+		width: 230px;
+		background-color: #001C2F;
+		z-index: 999 !important;
+		height: auto;
+		float: right;
+		padding-right: 15px;
+		visibility: hidden;
+		margin-top: -30px;
+		position: relative;
+	}
+
+	#menuwrapper li {
+		display: block !important;
+		z-index: 11 !important;
+		width: 220px !important;
+		padding-left: 0 !important;
+		margin-left: 0 !important;
+		padding-bottom: 20px;
+		white-space: nowrap;
+	}
+
+	#clear_text {
+		left: 65%;
+		top: 280px;
+	}
+
+	#link:hover > .hover_text {
+		left: 35%;
+	}
 }
