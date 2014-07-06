@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 $app = new \Slim\Slim(array(
     // change to 'development' for testing
-    'mode' => 'production'
+    'mode' => 'development'
 ));
 
 // Only invoked if mode is "production"
@@ -155,6 +155,32 @@ $app->get('/search/:searchQuery', function($searchQuery) use($app) {
 
     $app->response->headers->set('Content-Type', 'application/json');
     $app->response->write(json_encode($result));
+});
+
+$app->get('/questions', function() use ($app) {
+	$questions = executeSql('
+		SELECT
+			fq.Id AS id,
+			fq.Text AS text,
+			COALESCE(fqa.IsAnswered, 1) AS isAnswered
+		FROM faq_question AS fq
+			LEFT JOIN faq_questionassignment AS fqa ON
+				fqa.FAQ_QuestionID = fq.Id
+		HAVING isAnswered = 1
+		ORDER BY fq.Text ASC
+	');
+
+	$result = [];
+
+	foreach ($questions as $question) {
+		$result[] = [
+			'id' => $question->id,
+			'text' => $question->text
+		];
+	}
+
+	$app->response->headers->set('Content-Type', 'application/json');
+	$app->response->write(json_encode($result));
 });
 
 $app->post('/occupations', function() use($app) {
