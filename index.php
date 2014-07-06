@@ -157,6 +157,26 @@ $app->get('/search/:searchQuery', function($searchQuery) use($app) {
     $app->response->write(json_encode($result));
 });
 
+$app->post('/occupations', function() use($app) {
+    $result = [];
+    if (isset($_POST['education'])) {
+        $optionArray = $_POST['education'];
+        array_walk($optionArray, function($value, $index) {
+            $value = explode(",", $value);
+        });
+        $edLevels = implode(",", $optionArray);
+        //$app->log->info(sprintf("Education levels %s", $edLevels));
+        $res = executeSql("SELECT DISTINCT Name FROM occupations WHERE  EducationLevelId in ( $edLevels ) ORDER BY Name");
+    } else {
+        $res  = executeSql('SELECT DISTINCT Name FROM occupations ORDER BY Name');
+    }
+    foreach($res as $occupation) {
+        array_push($result, (array) $occupation);
+    }
+    $app->response->headers->set('Content-Type', 'application/json');
+    $app->response->write(json_encode($result));
+});
+
 $app->get('/questions', function() use ($app) {
 	if (isset($_GET['industry']) && strlen(trim($_GET['industry'])) > 0) { // filter by industry
 		$occupations = executeSql(
@@ -220,24 +240,31 @@ $app->get('/questions', function() use ($app) {
 	$app->response->write(json_encode($result));
 });
 
-$app->post('/occupations', function() use($app) {
-    $result = [];
-    if (isset($_POST['education'])) {
-        $optionArray = $_POST['education'];
-        array_walk($optionArray, function($value, $index) {
-            $value = explode(",", $value);
-        });
-        $edLevels = implode(",", $optionArray);
-        //$app->log->info(sprintf("Education levels %s", $edLevels));
-        $res = executeSql("SELECT DISTINCT Name FROM occupations WHERE  EducationLevelId in ( $edLevels ) ORDER BY Name");
-    } else {
-        $res  = executeSql('SELECT DISTINCT Name FROM occupations ORDER BY Name');
-    } 
-    foreach($res as $occupation) {
-        array_push($result, (array) $occupation);
-    }
-    $app->response->headers->set('Content-Type', 'application/json');
-    $app->response->write(json_encode($result));
+$app->get('/questions/:id/answers', function($id) use ($app) {
+	$answers = executeSql(
+		'
+			SELECT
+				fr.Id AS id,
+				fr.Text AS text
+			FROM faq_response AS fr
+				JOIN faq_responsefaq_question AS frq ON
+					frq.FAQ_Response_Id = fr.Id
+			WHERE frq.FAQ_Question_Id = :questionId
+		',
+		['questionId' => $id]
+	);
+
+	$result = [];
+
+	foreach ($answers as $answer) {
+		$result[] = [
+			'id' => $answer->id,
+			'text' => $answer->text
+		];
+	}
+
+	$app->response->headers->set('Content-Type', 'application/json');
+	$app->response->write(json_encode($result));
 });
 
 $app->run();
