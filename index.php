@@ -158,17 +158,54 @@ $app->get('/search/:searchQuery', function($searchQuery) use($app) {
 });
 
 $app->get('/questions', function() use ($app) {
-	$questions = executeSql('
-		SELECT
-			fq.Id AS id,
-			fq.Text AS text,
-			COALESCE(fqa.IsAnswered, 1) AS isAnswered
-		FROM faq_question AS fq
-			LEFT JOIN faq_questionassignment AS fqa ON
-				fqa.FAQ_QuestionID = fq.Id
-		HAVING isAnswered = 1
-		ORDER BY fq.Text ASC
-	');
+	if (isset($_GET['industry']) && strlen(trim($_GET['industry'])) > 0) { // filter by industry
+		$occupations = executeSql(
+			'
+				SELECT Id AS id
+				FROM occupations
+				WHERE IndustryId = :industryId
+			',
+			['industryId' => $_GET['industry']]
+		);
+
+		$occupationIds = [];
+
+		foreach ($occupations as $occupation) {
+			$occupationIds[] = $occupation->id;
+		}
+	} elseif (isset($_GET['occupation']) && strlen(trim($_GET['occupation'])) > 0) { // filter by occupation
+		$occupationIds = [$_GET['occupation']];
+	}
+
+	if (isset($occupationIds) && count($occupationIds) > 0) {
+		$questions = executeSql(
+			'
+				SELECT
+					fq.Id AS id,
+					fq.Text AS text,
+					COALESCE(fqa.IsAnswered, 1) AS isAnswered
+				FROM faq_question AS fq
+					LEFT JOIN faq_questionassignment AS fqa ON
+						fqa.FAQ_QuestionID = fq.Id
+				WHERE fq.OccupationId IN (:occupationIds)
+				HAVING isAnswered = 1
+				ORDER BY fq.Text ASC
+			',
+			['occupationIds' => implode(',', $occupationIds)]
+		);
+	} else {
+		$questions = executeSql('
+			SELECT
+				fq.Id AS id,
+				fq.Text AS text,
+				COALESCE(fqa.IsAnswered, 1) AS isAnswered
+			FROM faq_question AS fq
+				LEFT JOIN faq_questionassignment AS fqa ON
+					fqa.FAQ_QuestionID = fq.Id
+			HAVING isAnswered = 1
+			ORDER BY fq.Text ASC
+		');
+	}
 
 	$result = [];
 
