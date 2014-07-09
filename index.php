@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 $app = new \Slim\Slim(array(
     // change to 'development' for testing
-    'mode' => 'production'
+    'mode' => 'development'
 ));
 
 // Only invoked if mode is "production"
@@ -169,12 +169,102 @@ $app->post('/occupations', function() use($app) {
         $res = executeSql("SELECT DISTINCT Name FROM occupations WHERE  EducationLevelId in ( $edLevels ) ORDER BY Name");
     } else {
         $res  = executeSql('SELECT DISTINCT Name FROM occupations ORDER BY Name');
-    } 
+    }
     foreach($res as $occupation) {
         array_push($result, (array) $occupation);
     }
     $app->response->headers->set('Content-Type', 'application/json');
     $app->response->write(json_encode($result));
+});
+
+$app->get('/questions', function() use ($app) {
+	if (isset($_GET['industry']) && strlen(trim($_GET['industry'])) > 0) { // filter by industry
+		$occupations = executeSql(
+			'
+				SELECT Id AS id
+				FROM occupations
+				WHERE IndustryId = :industryId
+			',
+			['industryId' => $_GET['industry']]
+		);
+
+		$occupationIds = [];
+
+		foreach ($occupations as $occupation) {
+			$occupationIds[] = $occupation->id;
+		}
+	} elseif (isset($_GET['occupation']) && strlen(trim($_GET['occupation'])) > 0) { // filter by occupation
+		$occupationIds = [$_GET['occupation']];
+	}
+
+	if (isset($occupationIds) && count($occupationIds) > 0) {
+		$questions = executeSql(
+			'
+				SELECT
+					fq.Id AS id,
+					fq.Text AS text,
+					COALESCE(fqa.IsAnswered, 1) AS isAnswered
+				FROM faq_question AS fq
+					LEFT JOIN faq_questionassignment AS fqa ON
+						fqa.FAQ_QuestionID = fq.Id
+				WHERE fq.OccupationId IN (:occupationIds)
+				HAVING isAnswered = 1
+				ORDER BY fq.Text ASC
+			',
+			['occupationIds' => implode(',', $occupationIds)]
+		);
+	} else {
+		$questions = executeSql('
+			SELECT
+				fq.Id AS id,
+				fq.Text AS text,
+				COALESCE(fqa.IsAnswered, 1) AS isAnswered
+			FROM faq_question AS fq
+				LEFT JOIN faq_questionassignment AS fqa ON
+					fqa.FAQ_QuestionID = fq.Id
+			HAVING isAnswered = 1
+			ORDER BY fq.Text ASC
+		');
+	}
+
+	$result = [];
+
+	foreach ($questions as $question) {
+		$result[] = [
+			'id' => $question->id,
+			'text' => $question->text
+		];
+	}
+
+	$app->response->headers->set('Content-Type', 'application/json');
+	$app->response->write(json_encode($result));
+});
+
+$app->get('/questions/:id/answers', function($id) use ($app) {
+	$answers = executeSql(
+		'
+			SELECT
+				fr.Id AS id,
+				fr.Text AS text
+			FROM faq_response AS fr
+				JOIN faq_responsefaq_question AS frq ON
+					frq.FAQ_Response_Id = fr.Id
+			WHERE frq.FAQ_Question_Id = :questionId
+		',
+		['questionId' => $id]
+	);
+
+	$result = [];
+
+	foreach ($answers as $answer) {
+		$result[] = [
+			'id' => $answer->id,
+			'text' => $answer->text
+		];
+	}
+
+	$app->response->headers->set('Content-Type', 'application/json');
+	$app->response->write(json_encode($result));
 });
 
 $app->run();
