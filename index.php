@@ -80,24 +80,62 @@ $app->get('/api', function () use ($app) {
 
 // industry example
 $app->get('/industries', function () use ($app) {
-    $res = executeSql("SELECT DISTINCT Id, Name FROM industries ORDER BY Name");
-    foreach($res as $row){
-        echo "<a href=\"#\" onclick=\"return loadJob(";
-        echo $row->Id;
-        echo ")\" class=\"selectable_result\">" . $row->Name . "</a>";
-        echo "<br />";
+    $industries = executeSql('
+		SELECT DISTINCT
+			Id AS id,
+			Name AS name
+		FROM industries
+		ORDER BY Name
+	');
+
+	$result = [];
+
+    foreach($industries as $industry){
+        $result[] = [
+			'id' => $industry->id,
+			'name' => $industry->name
+		];
     };
 
+	$app->response->headers->set('Content-Type', 'application/json');
+	$app->response->write(json_encode($result));
 });
 
 // jobs example
 $app->get('/jobs', function () use ($app) {
-    $res = empty($_GET) ? executeSql("SELECT DISTINCT Name FROM occupations ORDER BY Name") : executeSql("SELECT DISTINCT Name FROM occupations WHERE IndustryId = :industry ORDER BY Name", array(':industry' => intval($_GET['industry'])));
-    foreach($res as $entry) {        
-        $row = $entry->Name;
-        echo "<a href=\"#\" onclick=\"return loadJobDetails('$row')\" class=\"selectable_result\">$row</a>";
-        echo "<br>";    
+	if (isset($_GET['industry']) && strlen(trim($_GET['industry'])) > 0) {
+		$occupations = executeSql(
+			'
+				SELECT
+					DISTINCT Name AS name,
+					Id AS id
+				FROM occupations
+				WHERE IndustryId = :industry
+				ORDER BY Name
+			',
+			['industry' => intval($_GET['industry'])]
+		);
+	} else {
+		$occupations = executeSql('
+			SELECT
+				DISTINCT Name AS name,
+				Id AS id
+			FROM occupations
+			ORDER BY Name
+		');
+	}
+
+	$result = [];
+
+    foreach($occupations as $occupation) {
+        $result[] = [
+			'id' => $occupation->id,
+			'name' => $occupation->name
+		];
     };
+
+	$app->response->headers->set('Content-Type', 'application/json');
+	$app->response->write(json_encode($result));
 });
 
 // jobs example
@@ -134,24 +172,59 @@ $app->get('/search/:searchQuery', function($searchQuery) use($app) {
     $result = array('industries' => [], 'jobs' => []);
 
     // find matching industries
-    $query = "SELECT Id, Name FROM industries WHERE MATCH(Name) AGAINST ( '$searchQuery' )";
-    $res = executeSql($query);
-    $industries = [];
-    foreach($res as $industry) {
-        $industries[$industry->Id] = array( 'id' => $industry->Id, 'name' => $industry->Name);
+    $industries = executeSql(
+		'
+			SELECT
+				Id AS id,
+				Name AS name
+			FROM industries
+			WHERE MATCH(Name) AGAINST ( :searchQuery )
+		',
+		['searchQuery' => $searchQuery]
+	);
+
+    $resultIndustries = [];
+
+    foreach($industries as $industry) {
+		$resultIndustries[$industry->id] = [
+			'id' => $industry->id,
+			'name' => $industry->name
+		];
     }
 
     // find matching jobs
-    $jobs = [];
-    $query = "SELECT DISTINCT i.Id as IndustryId, i.Name as IndustryName, o.Name as JobName FROM occupations o, industries i WHERE o.IndustryId = i.Id AND MATCH(o.Description, o.Name) AGAINST ( '$searchQuery' )";
-    $res = executeSql($query);
-    foreach($res as $job) {
-        array_push($jobs, array( 'name' => $job->JobName));
+	$jobs = executeSql(
+		'
+			SELECT DISTINCT
+				i.Id as industryId,
+				i.Name as industryName,
+				o.Name as jobName
+			FROM occupations o,
+				industries i
+			WHERE o.IndustryId = i.Id
+				AND MATCH(o.Description, o.Name) AGAINST ( :searchQuery )
+		',
+		['searchQuery' => $searchQuery]
+	);
+
+    $resultJobs = [];
+
+    foreach($jobs as $job) {
+		$resultJobs[] = [
+			'name' => $job->jobName
+		];
+
         // add job industry to industries list
-        $industries[$job->IndustryId] = array('id' => $job->IndustryId, 'name' => $job->IndustryName);
+		$resultIndustries[$job->industryId] = [
+			'id' => $job->industryId,
+			'name' => $job->industryName
+		];
     }
 
-    $result = array('industries' => array_values($industries), 'jobs' => $jobs);
+    $result = [
+		'industries' => array_values($resultIndustries),
+		'jobs' => $resultJobs
+	];
 
     $app->response->headers->set('Content-Type', 'application/json');
     $app->response->write(json_encode($result));

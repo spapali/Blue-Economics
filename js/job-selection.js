@@ -1,7 +1,11 @@
 //Loads jobs that correspong to the users selection of an industry
 function loadJob(industry) {
-	$.ajax({url:"/jobs?industry="+industry,success:function(result){
-			$("#box2 .resultsbox").html(result);
+	$.ajax({url:"/jobs?industry="+industry,success:function(result) {
+		html = '';
+		$.each(result, function(i, item) {
+			html += "<a href='#' onclick=\"return loadJobDetails('" + item.name + "')\" class=\"selectable_result\">" + item.name + "</a><br/>";
+		});
+		$("#box2 .resultsbox").html(html);
 	}});
 }
 
@@ -49,12 +53,20 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	//Pulls all industries on page load
-	$.ajax({url:"/jobs",success:function(result){
-		$("#box2 .resultsbox").html(result);
+	$.ajax({url:"/jobs",success:function(result) {
+		html = '';
+		$.each(result, function(i, item) {
+			html += "<a href='#' onclick=\"return loadJobDetails('" + item.name + "')\" class=\"selectable_result\">" + item.name + "</a><br/>";
+		});
+		$("#box2 .resultsbox").html(html);
 	}});
 	//Pulls all jobs on page load
 	$.ajax({url:"/industries",success:function(result){
-		$("#box1 .resultsbox").html(result);
+		html = '';
+		$.each(result, function(i, item) {
+			html += "<a href='#' onclick=\"return loadJob('" + item.id + "')\" class=\"selectable_result\">" + item.name + "</a><br/>";
+		});
+		$("#box1 .resultsbox").html(html);
 	}});
 	//Changes job results based on education level selection from user
 	$('input[name="education[]"]').change(function(){
