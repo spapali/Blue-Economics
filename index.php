@@ -313,6 +313,99 @@ $app->get('/questions', function() use ($app) {
 	$app->response->write(json_encode($result));
 });
 
+$app->post('/questions', function() use ($app) {
+    executeSql(
+        '
+            INSERT INTO faq_questionsource (`Name`, `Email`)
+            VALUES (:name, :email)
+        ',
+        [
+            'name' => $app->request->params('name'),
+            'email' => $app->request->params('email'),
+        ]
+    );
+
+    $sourceId = executeSql('SELECT LAST_INSERT_ID() AS id');
+    $sourceId = $sourceId[0]->id;
+
+    executeSql(
+        '
+            INSERT INTO faq_question (`Text`, `OccupationId`, `FAQ_QuestionSourceId`, `dateCreated`)
+            VALUES (:text, :job, :sourceId, NOW())
+        ',
+        [
+            'text' => $app->request->params('text'),
+            'job' => $app->request->params('job'),
+            'sourceId' => $sourceId
+        ]
+    );
+});
+
+$app->get('/questions/search/:searchQuery', function($searchQuery) use($app) {
+    // find matching questions
+    $questions = executeSql(
+        '
+            SELECT
+                fq.Id AS id,
+                fq.Text AS text,
+                COALESCE(fqa.IsAnswered, 1) AS isAnswered
+            FROM faq_question AS fq
+                LEFT JOIN faq_questionassignment AS fqa ON
+                    fqa.FAQ_QuestionID = fq.Id
+            WHERE MATCH(fq.Text) AGAINST (:searchQuery)
+            HAVING isAnswered = 1
+            ORDER BY fq.Text ASC
+        ',
+        ['searchQuery' => $searchQuery]
+    );
+
+    $resultQuestions = [];
+
+    foreach($questions as $question) {
+        $resultQuestions[$question->id] = [
+            'id' => $question->id,
+            'name' => $question->text
+        ];
+    }
+
+    // find matching answers
+    $answers = executeSql(
+        '
+            SELECT
+                fq.Id AS id,
+                fq.Text AS text,
+                COALESCE(fqa.IsAnswered, 1) AS isAnswered
+            FROM faq_question AS fq
+                JOIN faq_questionassignment AS fqa ON
+                    fqa.FAQ_QuestionID = fq.Id
+                JOIN faq_responsefaq_question AS frfq ON
+                    frfq.FAQ_Question_Id = fq.Id
+                JOIN faq_response AS fr ON
+                    fr.Id = frfq.FAQ_Response_Id
+            WHERE MATCH(fr.Text) AGAINST(:searchQuery)
+            HAVING isAnswered = 1
+            ORDER BY fq.Text ASC
+        ',
+        ['searchQuery' => $searchQuery]
+    );
+
+    foreach($answers as $answer) {
+        if (!isset($resultQuestions[$answer->id])) {
+            $resultQuestions[$answer->id] = [
+                'id' => $answer->id,
+                'name' => $answer->text
+            ];
+        }
+    }
+
+    $result = [
+        'questions' => array_values($resultQuestions),
+    ];
+
+    $app->response->headers->set('Content-Type', 'application/json');
+    $app->response->write(json_encode($result));
+});
+
 $app->get('/questions/:id/answers', function($id) use ($app) {
 	$answers = executeSql(
 		'

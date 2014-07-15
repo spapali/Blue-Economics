@@ -54,6 +54,7 @@ CREATE TABLE `faq_question` (
   `Text` longtext NOT NULL,
   `OccupationId` int(11) NOT NULL,
   `FAQ_QuestionSourceId` int(11) NOT NULL,
+  `dateCreated` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `IX_OccupationId` (`OccupationId`),
   KEY `IX_FAQ_QuestionSourceID` (`FAQ_QuestionSourceId`)
@@ -3496,6 +3497,7 @@ CREATE TABLE `faq_questionassignment` (
 CREATE TABLE `faq_questionsource` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(400) NOT NULL,
+  `Email` varchar(128) NULL DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5024 ;
 
@@ -3504,7 +3506,7 @@ CREATE TABLE `faq_questionsource` (
 --
 
 INSERT INTO `faq_questionsource` (`Id`, `Name`) VALUES
-(5023, 'Joey Blow');
+(5023, 'Joey Blow', 'example@domain.com');
 
 -- --------------------------------------------------------
 
