@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="blueecon_faq" defaultIdMethod="native" defaultPhpNamingMethod="underscore">
+  <table name="expert_group" idMethod="native" phpName="ExpertGroup">
+    <column name="group_name" phpName="GroupName" type="VARCHAR" size="45" primaryKey="true" required="true"/>
+    <column name="soc_code" phpName="SocCode" type="VARCHAR" size="7"/>
+    <index name="job_id_idx">
+      <index-column name="soc_code"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="expert_group_members" idMethod="native" phpName="ExpertGroupMembers">
+    <column name="expert" phpName="Expert" type="VARCHAR" size="45" primaryKey="true" required="true"/>
+    <column name="group_name" phpName="GroupName" type="VARCHAR" size="45" primaryKey="true" required="true"/>
+    <foreign-key foreignTable="expert_group" name="m_group">
+      <reference local="group_name" foreign="group_name"/>
+    </foreign-key>
+    <foreign-key foreignTable="experts" name="m_expert">
+      <reference local="expert" foreign="username"/>
+    </foreign-key>
+    <index name="group_name">
+      <index-column name="group_name"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="expert_question_state" idMethod="native" phpName="ExpertQuestionState">
+    <column name="username" phpName="Username" type="VARCHAR" size="45" required="true"/>
+    <column name="question_id" phpName="QuestionId" type="BIGINT" required="true"/>
+    <column name="is_read" phpName="IsRead" type="BOOLEAN" size="1" defaultValue="false"/>
+    <column name="is_responded" phpName="IsResponded" type="BOOLEAN" size="1" defaultValue="false"/>
+    <column name="is_expunged" phpName="IsExpunged" type="BOOLEAN" size="1" defaultValue="false"/>
+    <column name="is_muted" phpName="IsMuted" type="BOOLEAN" size="1"/>
+    <foreign-key foreignTable="experts" name="s_expert_id">
+      <reference local="username" foreign="username"/>
+    </foreign-key>
+    <foreign-key foreignTable="questions" name="s_question_id">
+      <reference local="question_id" foreign="id"/>
+    </foreign-key>
+    <index name="expert_id_idx">
+      <index-column name="username"/>
+    </index>
+    <index name="question_id_idx">
+      <index-column name="question_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="experts" idMethod="native" phpName="Experts">
+    <column name="username" phpName="Username" type="VARCHAR" size="45" primaryKey="true" required="true"/>
+    <column name="first_name" phpName="FirstName" type="VARCHAR" size="45" required="true"/>
+    <column name="last_name" phpName="LastName" type="VARCHAR" size="45"/>
+    <column name="bio" phpName="Bio" type="VARCHAR"/>
+    <column name="organization" phpName="Organization" type="VARCHAR" size="45"/>
+    <column name="password" phpName="Password" type="VARCHAR" size="255" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="questions" idMethod="native" phpName="Questions">
+    <column name="id" phpName="Id" type="BIGINT" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="submitter" phpName="Submitter" type="VARCHAR" size="45" required="true"/>
+    <column name="question" phpName="Question" type="VARCHAR" size="255" required="true"/>
+    <column name="created" phpName="Created" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="soc_code" phpName="SocCode" type="VARCHAR" size="7"/>
+    <index name="jobs_id_fk_idx">
+      <index-column name="soc_code"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="responses" idMethod="native" phpName="Responses">
+    <column name="id" phpName="Id" type="BIGINT" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="expert" phpName="Expert" type="VARCHAR" size="45" required="true"/>
+    <column name="question_id" phpName="QuestionId" type="BIGINT" required="true"/>
+    <column name="created" phpName="Created" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="response" phpName="Response" type="VARCHAR" required="true"/>
+    <column name="votes" phpName="Votes" type="INTEGER" defaultValue="0"/>
+    <foreign-key foreignTable="experts" name="r_expert_id">
+      <reference local="expert" foreign="username"/>
+    </foreign-key>
+    <foreign-key foreignTable="questions" name="r_question_id">
+      <reference local="question_id" foreign="id"/>
+    </foreign-key>
+    <index name="submitter_idx">
+      <index-column name="expert"/>
+    </index>
+    <index name="question_id_idx">
+      <index-column name="question_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>

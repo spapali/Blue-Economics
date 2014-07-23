@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 //var $app = null;
 
@@ -153,7 +153,7 @@ function calcJobScores(&$data) {
     }
 
     //find the max weight score and use to normalize all scores
-    $maxScore = max(array_map(function($item, $key){
+    $maxScore = max(array_map(function($item){
         return $item["BlueEconScore"];
     }, $data));
 
@@ -240,8 +240,6 @@ function cleanupWages(&$wageData) {
             }
         }
     });
-    print_r($wageData);
-
 }
 
 function main() {

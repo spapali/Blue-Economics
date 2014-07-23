@@ -1,6 +1,17 @@
 {
     "require": {
         "slim/slim": "2.*",
-        "apache/log4php": "2.3.0"
+        "apache/log4php": "2.3.0",
+        "propel/propel": "2.0.*@dev",
+        "phpmailer/phpmailer": "v5.2.8",
+        "twig/twig": "1.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*",
+        "phpunit/php-invoker": "*",
+        "phpunit/dbunit": ">=1.2"
+    },
+    "autoload": {
+        "classmap": [ "generated-classes/","generated-conf/", "faq-app/" ]
     }
 }

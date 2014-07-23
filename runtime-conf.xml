@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <log>
+        <ident>propel-blueecon</ident>
+        <type>console</type>
+        <level>7</level>
+    </log>
+    <propel>
+        <datasources default="blueecon_faq">
+            <datasource id="blueecon_faq">
+                <adapter>mysql</adapter>
+                <connection>
+                    <dsn>mysql:host=localhost;dbname=blueecon_faq</dsn>
+                    <user>root</user>
+                    <password></password>
+                </connection>
+            </datasource>
+            <datasource id="blueeconomics">
+                <adapter>mysql</adapter>
+                <connection>
+                    <dsn>mysql:host=localhost;dbname=blueeconomics</dsn>
+                    <user>root</user>
+                    <password></password>
+                </connection>
+            </datasource>
+        </datasources>
+    </propel>
+</config>
