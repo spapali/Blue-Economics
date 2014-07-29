@@ -29,7 +29,7 @@ create table blueeconomics.jobs(
 	AvailabilityScore float,
 	IncomeScore float
 )
-engine = 'InnoDb'
+engine = 'MyISAM'
 charset = 'utf8';
 create fulltext index job_desc_ix on blueeconomics.jobs(JobDescription);
 create fulltext index job_title_ix on blueeconomics.jobs(JobTitle);
@@ -39,7 +39,7 @@ create table blueeconomics.industry (
 	SocCode varchar(7),
 	IndustryName varchar(255)
 )
-engine = 'InnoDb'
+engine = 'MyISAM'
 charset = 'utf8';
 
 create fulltext index ind_name_ix on blueeconomics.industry(IndustryName);
