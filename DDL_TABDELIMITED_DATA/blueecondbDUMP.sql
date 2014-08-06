@@ -3505,7 +3505,7 @@ CREATE TABLE `faq_questionsource` (
 -- Dumping data for table `faq_questionsource`
 --
 
-INSERT INTO `faq_questionsource` (`Id`, `Name`) VALUES
+INSERT INTO `faq_questionsource` (`Id`, `Name`, `Email`) VALUES
 (5023, 'Joey Blow', 'example@domain.com');
 
 -- --------------------------------------------------------
