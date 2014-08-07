@@ -14,6 +14,8 @@ SET time_zone = "+00:00";
 -- Database: `BlueEconomics`
 --
 
+use blueeconomics;
+
 -- --------------------------------------------------------
 
 --
