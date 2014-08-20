@@ -1,18 +1,22 @@
 $(document).ready(function(){
-	$("#arrow1").addClass("makevisible");
-	$("#box1 .resultsbox").addClass("makeblue");
-	$("#box1 .labeltab").addClass("makeblue");
-	$("#box1 .labeltab p").addClass("makewhite");
+	$("#arrow1").addClass("visible");
+	$("#arrow2").addClass("invisible");
+	$("#arrow3").addClass("invisible");
+	$("#box1 .resultsbox").addClass("blue");
+	$("#box1 .labeltab").addClass("blue");
+	$("#box1 .labeltab p").addClass("white");
 	$("#box1 .resultsbox").click(function(){
-		$("#arrow1").removeClass("makevisible");
-		$("#box1 .labeltab").removeClass("makeblue");
-		$("#box1 .labeltab p").removeClass("makewhite")
-		$("#box1 .resultsbox").removeClass("makeblue");
+		$("#arrow1").removeClass("visible");
+		$("#arrow1").addClass("invisible");
+		$("#box1 .labeltab").removeClass("blue");
+		$("#box1 .labeltab p").removeClass("white")
+		$("#box1 .resultsbox").removeClass("blue");
 
-		$("#arrow2").addClass("makevisible");
-		$("#box2 .resultsbox").addClass("makeblue");
-		$("#box2 .labeltab").addClass("makeblue");
-		$("#box2 .labeltab p").addClass("makewhite");
+		$("#arrow2").removeClass("invisible");
+		$("#arrow2").addClass("visible");
+		$("#box2 .resultsbox").addClass("blue");
+		$("#box2 .labeltab").addClass("blue");
+		$("#box2 .labeltab p").addClass("white");
 		$("#box2 .resultsbox").click(function(){
 			$("#arrow2").removeClass("makevisible");
 			$("#box2 .labeltab").removeClass("makeblue");
