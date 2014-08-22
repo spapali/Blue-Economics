@@ -36,8 +36,8 @@ function loadPartials() {
 //Hits search function in the API and returns results
 $(document).ready(function() {
 	loadPartials();
-	$("form:first").submit(function() {
-		event.preventDefault();
+	$("#searchBox").submit(function() {
+		//event.preventDefault();
 		var mydata = $(this).serialize();
 		unserializeddata = mydata.slice(9);
 		console.log(unserializeddata);

@@ -56,3 +56,36 @@ $(document).ready(function() {
 		$("#menu_button").removeClass("invisible");
 	});
 });*/
+
+$(document).ready(function() {
+	$("form:first").submit(function() {
+		event.preventDefault();
+		var mydata = $(this).serialize();
+		unserializeddata = mydata.slice(9);
+		console.log(unserializeddata);
+		$.ajax({
+			url: "/search/" + unserializeddata,
+			dataType: 'json',
+			success: function(result) {
+				isitempty = result.jobs.length;
+				if (isitempty === 0) {
+					alert("Your search had no results");
+				}
+				console.log(result);
+				var arr = [];
+				$.each(result.jobs, function(i, item) {
+					html = "<a href='#' onclick=\"return loadJobDetails('" + item.name + "')\" class=\"selectable_result\">" + item.name + "</a><br/>";
+					console.log(html);
+					//arr.push(html);
+					$("#box2 .resultsbox" ).empty();
+					$("#box2 .resultsbox").append(html);
+				});
+				//$('#joblist').html(arr);
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				alert("Something didn't work");
+			}
+		});
+
+	});
+});

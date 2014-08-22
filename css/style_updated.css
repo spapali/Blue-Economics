@@ -43,13 +43,13 @@ html {
 
 #menuwrapper ul li a:hover {
 	text-decoration: none;
-	color:#1E9ED6;
+	color:#1E9ED6 !important;
 	font-weight: 300;
 }
 
 #menuwrapper ul li a:active {
 	text-decoration: none;
-	color:#F15A24;
+	color:#F15A24 !important;
 	font-weight: 300;
 }
 
@@ -79,8 +79,6 @@ html {
 	visibility:visible;
 	text-align: center;
 	width: 125px;
-	top: 160px;
-	left: 220px;
 	background-color: #000000;
 	padding: .75%;
 	color: #FFFFFF;
@@ -233,6 +231,8 @@ html {
 	opacity: 1 !important;
 	filter:alpha(opacity=100); /* For IE8 and earlier */
 }
+
+
 
 /* These are the styles for all of the links */
 
@@ -532,6 +532,13 @@ html {
 	color: #1E9ED6;
 }
 
+.greytext {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	text-decoration: none;
+	color: #333333;
+}
+
 .raleway {
 	font-family: 'Raleway', sans-serif;
 	font-weight: 300;
@@ -567,6 +574,11 @@ html {
 		margin-left: 850px;
 		top: 183px;
 	}
+
+	#link:hover > .hover_text {
+		margin-top: 75px;
+		margin-left: 0px;
+	}
 }
 
 @media only screen and (min-width:1060px) and (max-width:1259px) {
@@ -591,6 +603,11 @@ html {
 	#clear_text {
 		margin-left: 845px;
 		top: 183px;
+	}
+
+	#link:hover > .hover_text {
+		margin-top: 75px;
+		margin-left: 0px;
 	}
 }
 
@@ -675,6 +692,11 @@ html {
 	#clear_text {
 		margin-left: 665px;
 		top: 171px;
+	}
+
+	#link:hover > .hover_text {
+		margin-top: 65px;
+		margin-left: 0px;
 	}
 }
 
@@ -789,6 +811,7 @@ html {
 	}
 
 	#link:hover > .hover_text {
-		left: 35%;
+		margin-top: 05px;
+		margin-left: 100px;
 	}
 }
