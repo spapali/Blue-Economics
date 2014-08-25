@@ -16,10 +16,20 @@ $(document).ready(function() {
 	//Clear input box when clear button is clicked
 	$("#clearbutton").click(function() {
 		$("#searchBox").val('');
+		$("#box1 .resultsbox").empty();
+		$("#box2 .resultsbox").empty();
+		$("#box3 .resultsbox").empty();
+		loadIndustry();
+		loadJob();
 	});
 	//Clears input box when input box is clicked
 	$("#searchBox").click(function() {
 		$("#searchBox").val('');
+		$("#box1 .resultsbox").empty();
+		$("#box2 .resultsbox").empty();
+		$("#box3 .resultsbox").empty();
+		loadIndustry();
+		loadJob();
 	});
 	//If input box is empty when mouse leaves top box, it fills it
 	$("#searchbar").mouseout(function() {
@@ -72,13 +82,21 @@ $(document).ready(function() {
 					alert("Your search had no results");
 				}
 				console.log(result);
-				var arr = [];
+				//var arr = [];
 				$.each(result.jobs, function(i, item) {
 					html = "<a href='#' onclick=\"return loadJobDetails('" + item.name + "')\" class=\"selectable_result\">" + item.name + "</a><br/>";
 					console.log(html);
 					//arr.push(html);
-					$("#box2 .resultsbox" ).empty();
+					$("#box2 .resultsbox").empty();
 					$("#box2 .resultsbox").append(html);
+				});
+
+				$.each(result.industries, function(i, item) {
+					html = "<a href='#' onclick=\"return loadJob('" + item.id + "')\" class=\"selectable_result\">" + item.name + "</a><br/>";
+					console.log(html);
+					//arr.push(html);
+					$("#box1 .resultsbox").empty();
+					$("#box1 .resultsbox").append(html);
 				});
 				//$('#joblist').html(arr);
 			},
@@ -89,3 +107,11 @@ $(document).ready(function() {
 
 	});
 });
+/*
+$(document).ready(function() {
+	$("#menuwrapper ul li a:lt(3)").attr("href","jobs-faq.html");
+	$("#menuwrapper ul li a:lt(2)").text("I want small business advice");
+	$("#menuwrapper ul li a:lt(2)").attr("href","business-selection.html");
+	$("#menuwrapper ul li a:lt(1)").text("I want to learn about better jobs");
+	$("#menuwrapper ul li a:lt(1)").attr("href","jobs-selection.html");
+});*/

@@ -5,7 +5,7 @@ $(document).ready(function(){
 	$("#box1 .resultsbox").addClass("blue");
 	$("#box1 .labeltab").addClass("blue");
 	$("#box1 .labeltab p").addClass("white");
-	$("#box1 a.selectable_result").addClass("orange");
+	$("#box1 .resultsbox a.selectable_result").addClass("orange");
 	$("#box1 .resultsbox").click(function(){
 		$("#arrow1").removeClass("visible");
 		$("#arrow1").addClass("invisible");
