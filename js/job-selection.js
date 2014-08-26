@@ -80,14 +80,8 @@ function loadPartials() {
 $(document).ready(function() {
 	loadPartials();
 	loadJob();
+	
 	loadIndustry();
-
-	$("#menuwrapper ul li a:lt(3)").attr("href","jobs-faq.html");
-	$("#menuwrapper ul li a:lt(2)").text("I want small business advice");
-	$("#menuwrapper ul li a:lt(2)").attr("href","business-selection.html");
-	$("#menuwrapper ul li a:lt(1)").text("I want to learn about better jobs");
-	$("#menuwrapper ul li a:lt(1)").attr("href","jobs-selection.html");
-	$("#menuwrapper ul li a:lt(1)").addClass("orange");
 
 	//Changes job results based on education level selection from user
 	$('input[name="education[]"]').change(function() {
