@@ -58,24 +58,24 @@ $(document).ready(function() {
 		$("#clear_text").addClass("invisible");
 	});
 });
-/*
+
 $(document).ready(function() {
 	$("#menu_button").mouseover(function() {
 		$("#menuwrapper ul").addClass("visible");
-		$("#menu_button").addClass("invisible");
+		$("#menu_button").removeClass("visible");
 	});
 	$("#menuwrapper ul").mouseover(function() {
 		$("#menuwrapper ul").addClass("visible");
-		$("#menu_button").addClass("invisible");
+		$("#menu_button").removeClass("visible");
 	});
 	$("#menuwrapper li").mouseover(function() {
-		$("#menu_button").addClass("invisible");
+		$("#menu_button").removeClass("visible");
 	});
 	$("#menuwrapper ul").mouseout(function() {
 		$("#menuwrapper ul").removeClass("visible");
 		$("#menu_button").removeClass("invisible");
 	});
-});*/
+});
 
 //Sets nav bar for all pages in the jobs section
 function jobsNavBar() {

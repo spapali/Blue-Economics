@@ -14,11 +14,6 @@ html {
 	margin-right: auto;
 }
 
-#menu_button {
-	position: absolute;
-	visibility: hidden;
-}
-
 #menu {
 	width: 1050px;
 	margin-left: auto;
@@ -551,7 +546,7 @@ html {
 }
 
 .visible {
-	visibility: visible;
+	visibility: visible !important;
 }
 
 /* Media Queries for Responsive Site */
@@ -578,6 +573,10 @@ html {
 	#link:hover > .hover_text {
 		margin-top: 75px;
 		margin-left: 0px;
+	}
+
+	#menu_button {
+		visibility: hidden;
 	}
 }
 
@@ -608,6 +607,10 @@ html {
 	#link:hover > .hover_text {
 		margin-top: 75px;
 		margin-left: 0px;
+	}
+
+	#menu_button {
+		visibility: hidden;
 	}
 }
 
@@ -666,10 +669,11 @@ html {
 		height: auto;
 	}
 
-	#menu {
+	#menu ul {
 		width: 800px;
 		padding-left: 0;
 		white-space: nowrap;
+		z-index: 100;
 	}
 
 	#menuwrapper {
@@ -697,6 +701,10 @@ html {
 	#link:hover > .hover_text {
 		margin-top: 65px;
 		margin-left: 0px;
+	}
+
+	#menu_button {
+		visibility: hidden;
 	}
 }
 
@@ -771,7 +779,7 @@ html {
 	}
 
 	#menu_button {
-		top: 0;
+		top: -210px;
 		text-align: right;
 		float: right;
 		visibility: visible;
@@ -780,7 +788,7 @@ html {
 	}
 
 	#menu_button:hover {
-		color: #001C2F;
+		color: #F15A24;
 	}
 
 	#menuwrapper ul {
