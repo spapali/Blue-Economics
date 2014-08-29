@@ -14,6 +14,7 @@ $(document).ready(function() {
 	$("#searchbar").mouseout(function() {
 		$("#clearbutton").removeClass("visible");
 		$("#clearbutton").addClass("invisible");
+		$("#searchbar h2 input").css({"opacity": "0.5"});
 	});
 	//Clear input box when clear button is clicked
 	$("#clearbutton").click(function() {
@@ -23,9 +24,13 @@ $(document).ready(function() {
 		$("#box3 .resultsbox").empty();
 		box1active();
 		var butonClickCheck = location.pathname;
-		if (buttonClickCheck = "/views/jobs-selection.html") {
+		if (buttonClickCheck == "/views/jobs-selection.html") {
 			loadIndustry();
 			loadJob();
+		} else if (buttonClickCheck == "/views/jobs-faq.html") {
+			faqResults();
+		} else if (buttonClickCheck == "/views/business-faq-faq.html") {
+			faqResults();
 		}
 	});
 	//Clears input box when input box is clicked
@@ -39,12 +44,17 @@ $(document).ready(function() {
 		if (inputClickCheck = "/views/jobs-selection.html") {
 			loadIndustry();
 			loadJob();
+		}  else if (buttonClickCheck == "/views/jobs-faq.html") {
+			faqResults();
+		} else if (buttonClickCheck == "/views/business-faq-faq.html") {
+			faqResults();
 		}
 	});
 	//If input box is empty when mouse leaves top box, it fills it
 	$("#searchbar").mouseout(function() {
 		if ($($.trim("#searchBox")).val() === "") {
 			$("#searchBox").val("type what you are looking for here");
+			$("#searchbar h2 input").css({"opacity": "0.5"});
 		}
 	});
 	//Shows clear button description on mouse hover
@@ -56,6 +66,7 @@ $(document).ready(function() {
 	$("#clearbutton").mouseout(function() {
 		$("#clear_text").removeClass("visible");
 		$("#clear_text").addClass("invisible");
+		$("#searchbar h2 input").css({"opacity": "0.5"});
 	});
 });
 
@@ -88,7 +99,7 @@ function jobsNavBar() {
 
 function faqHeader() {
 	$("#searchbar h1").text("Ask a Question");
-	$("#searchbar h2").html('Enter a Question of Keyword: <input type="text" name="mySearch" id="searchBox" placeholder="type what you are looking for here"><span id="clearbutton" alt="Click here to clear search bar">X</span>');
+	$("#searchbar h2").html('Enter a Question or Keyword: <input type="text" name="mySearch" id="searchBox" placeholder="type what you are looking for here"><span id="clearbutton" alt="Click here to clear search bar">X</span>');
 	hideEducation();
 }
 

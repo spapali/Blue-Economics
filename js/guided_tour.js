@@ -83,7 +83,42 @@ function selectionPages(){
 function faqResults(){
 	$("#box1 .labeltab p").text("FAQs");
 	$("#box2 .labeltab p").text("Answers");
-	$("#box3").addClass("invisible");
+	$("#box3 .labeltab").addClass("invisible");
+	$("#box3 .activearrow").addClass("invisible");
+	$("#box3 .resultsbox").addClass("invisible");
+}
+
+function hideFAQbutton() {
+	$("#open_faq_button").addClass("invisible");
+	$("#open_faq_button").css({"position": "absolute"});
+}
+
+function FAQbutton_rollover(){
+	$("#open_faq_button").mouseover(function() {
+		$("#open_faq_button").css({"color": "#FFFFFF"});
+	});
+	$("#open_faq_button").mouseout(function() {
+		$("#open_faq_button").css({"color": "#001C2F"});
+	});
+	$("#open_faq_button").click(function() {
+		openFAQ();
+	});
+}
+
+function openFAQ() {
+	hideFAQbutton();
+	$("#box3 .labeltab").removeClass("invisible");
+	$("#box3 .activearrow").removeClass("invisible");
+	$("#box3 .resultsbox").removeClass("invisible");
+	$("#box3 .labeltab").addClass("visible");
+	$("#box3 .activearrow").addClass("visible");
+	$("#box3 .resultsbox").addClass("visible");
+	$("#box3 .labeltab p").text("Question");
+	box3active();
+	$("#box3 .resultsbox").html('<p><h4>New Question:</h4><textarea id="faq_input1" rows"4" cols="1">type your question here</textarea></p><p><h4>Your E-Mail Address:</h4><input type="text" name="faq_e-mail" id="faq_input2" placeholder="type your e-mail address here"><span id="e-mail">we need your e-mail address to let you know when your question has been answered</span></p><a href="#" id="faq_submit">Submit</a>');
+	$("#box3 .resultsbox h4").addClass("orange");
+	$("#faq_input1, #faq_input2").addClass("faqinput");
+	$("#e-mail").addClass("raleway");
 }
 
 $(document).ready(function(){
@@ -98,13 +133,17 @@ $(document).ready(function(){
 	console.log(check);
 	if (check == "/views/jobs-selection.html") {
 		selectionPages();
+		hideFAQbutton();
 	} else if (check == "/views/jobs-faq.html") {
 		faqResults();
+		FAQbutton_rollover();
 	} else if (check == "/views/business-selection.html") {
 		$("#box1 .labeltab p").text("Category");
 		$("#box2 .labeltab p").text("Topics");
 		$("#box3 .labeltab p").text("Articles");
+		hideFAQbutton();
 	} else if (check == "/views/business-faq.html") {
 		faqResults();
+		FAQbutton_rollover();
 	}
 });
