@@ -211,29 +211,25 @@ html {
 #open_faq_button {
 	float: left;
 	width: 94%;
-	font-family: 'Merriweather Sans', sans-serif;
-	font-weight: 300;
-	background-color: #F15A24;
-	color: #001C2F;
 	height: 32px;
-	text-align: center;
-	vertical-align: middle;
 	margin-top: 32px;
 	padding-top: 10px;
-	text-decoration: none;
-}
-
-.faqinput {
-	opacity: 0.5;
-	width: 100%;
-	font-size: 1em;
-	margin-top: -17px;
+	color: #001C2F;
 }
 
 #faq_input1 {
 	height: 40%;
 	word-wrap: normal;
 	text-align: top;
+}
+
+#faq_submit {
+	padding: 5px;
+	color: #FFFFFF;
+}
+
+#faq_submit:hover {
+	color: #001C2F;
 }
 
 .descriptor {
@@ -569,6 +565,22 @@ html {
 
 .visible {
 	visibility: visible !important;
+}
+
+.orange_button {
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: 300;
+	background-color: #F15A24;
+	text-align: center;
+	vertical-align: middle;
+	text-decoration: none;
+}
+
+.faqinput {
+	opacity: 0.5;
+	width: 100%;
+	font-size: 1em;
+	margin-top: -17px;
 }
 
 /* Media Queries for Responsive Site */

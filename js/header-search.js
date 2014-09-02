@@ -23,13 +23,13 @@ $(document).ready(function() {
 		$("#box2 .resultsbox").empty();
 		$("#box3 .resultsbox").empty();
 		box1active();
-		var butonClickCheck = location.pathname;
+		var buttonClickCheck = location.pathname;
 		if (buttonClickCheck == "/views/jobs-selection.html") {
 			loadIndustry();
 			loadJob();
 		} else if (buttonClickCheck == "/views/jobs-faq.html") {
 			faqResults();
-		} else if (buttonClickCheck == "/views/business-faq-faq.html") {
+		} else if (buttonClickCheck == "/views/business-faq.html") {
 			faqResults();
 		}
 	});
