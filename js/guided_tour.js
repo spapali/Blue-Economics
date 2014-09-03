@@ -136,13 +136,7 @@ function openFAQ() {
 	$("#faq_input1, #faq_input2").addClass("faqinput");
 	$("#e-mail").addClass("raleway");
 	$("#faq_submit").addClass("orange_button");
-	$("#faq_submit").click(function(){
-		alert("Thank you for your submission. We'll send you an e-mail once your query has a response.");
-		showFAQbutton();
-		box1activate();
-	});
 
-	//Form validation for Question Box
 	$("#faq_input1").click(function(){
 		$("#faq_input1").empty();
 	});
@@ -152,11 +146,13 @@ function openFAQ() {
 		}
 	});
 
+	checkSubmit();
 	hideFAQresults();
 }
 
 //Applies CSS to close FAQ Box
 function showFAQbutton() {
+	console.log("FAQbutton was triggered");
 	$("#box3 .labeltab").removeClass("visible");
 	$("#box3 .activearrow").removeClass("visible");
 	$("#box3 .resultsbox").removeClass("visible");
@@ -167,32 +163,97 @@ function showFAQbutton() {
 	$("#open_faq_button").addClass("visible");
 	$("#open_faq_button").addClass("orange_button");
 	$("#open_faq_button").css({"position": "relative"});
+	box1active();
 }
 
-//Closes FAQ Box
-function hideFAQresults(){
-	$("#searchBar, #clearbutton").click(function() {
-		showFAQbutton();
-		box1active();
+function checkSubmit(){
+	$("#faq_submit").click(function(){
+		console.log("Initiated checkSubmit");
+		var formcheck = check_form();
+		console.log(formcheck);
+		if (formcheck == "true") {
+			alert("Thank you for your submission. We'll send you an e-mail once your query has a response.");
+		} else {
+			alert("You haven't entered anything into the form");
+		}
 	});
 }
 
-//Checks if user has entered any information before closing FAQ Box
-function closeFAQ() {
+//Closes FAQ Box if it is empty or alerts user that they have begun to fill out form
+function hideFAQresults(){
+	$("#clearbutton").click(function() {
+		console.log("Initiated hideFAQresults");
+		var formchecker = check_form();
+		console.log(formchecker);
+		if (formchecker == "false") {
+			console.log("Form would have closed");
+    	} else {
+    		console.log("Alert would have triggered");
+    	}
+    });
+}
+/*
+//Checks whether form is open and/or empty
+function check_form() {
+	console.log("Initiated check_form");
+	var step1formcheck = form_open_check();
+	console.log(step1formcheck);
+	if (step1formcheck == "false") {
+		return false;
+    } else {
+    	var step2formcheck = is_form_empty();
+    	console.log(step2formcheck);
+    	if (step2formcheck == "true"){
+    		return false;
+    	}  else {
+    		return true;
+    	}
+	}
+}
+
+//Checks whether form is open
+function form_open_check() {
+	console.log("Initiated form_open_check");
+	var cssCheck = $("#box3 .resultsbox").css("visibility");
+		console.log(cssCheck);
+		if (cssCheck == "visible") {
+			return true;
+		} else {
+			return false;
+		}
+}
+
+//Checks if user has entered any information into form
+function is_form_empty() {
+	console.log("Initiated is_form_empty");
+	if (($($.trim("#faq_input1")).val() === "type your question here") || ($($.trim("#faq_input2")).val() === "") || ($($.trim("#faq_input1")).val() === "")){
+		console.log("Initiated form check - empty inputs recognized");
+		if (($($.trim("#faq_input1")).val() === "type your question here") || ($($.trim("#faq_input1")).val() === "")){
+			console.log("Initiated form check - question input empty recognized");
+			alert("Please enter a valid question");
+		}
+
+		if ($($.trim("#faq_input2")).val() === "") {
+			console.log("Initiated form check - e-mail input empty recognized");
+			alert("Please enter a valid e-mail address");
+		}
+
+		return true;
+	} else {
+		return false;
+	}
+}
+
+//Alerts user if they have begun to fill out form and abandoned it
+function alert_to_user() {
+	console.log("Initiated alert_to_user");
 	if (confirm("You have entered text into the FAQ form! Press OK if you want to discard this information.") == true) {
 		showFAQbutton();
     } else {
     	openFAQ();
     }
 }
-
-function form_empty_check() {
-	var cssCheck = $("#box3 .resultsbox").css("visibility");
-		if (cssCheck == "visible") {
-			//Check to see if form fields are empty will be here
-		}
-}
-
+*/
 $(document).ready(function(){
 
 	box1active();

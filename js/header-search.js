@@ -18,36 +18,25 @@ $(document).ready(function() {
 	});
 	//Clear input box when clear button is clicked
 	$("#clearbutton").click(function() {
-		$("#searchBox").val('');
-		$("#box1 .resultsbox").empty();
-		$("#box2 .resultsbox").empty();
-		$("#box3 .resultsbox").empty();
-		box1active();
 		var buttonClickCheck = location.pathname;
 		if (buttonClickCheck == "/views/jobs-selection.html") {
-			loadIndustry();
-			loadJob();
+			clear_it_out();
+			box1active();
 		} else if (buttonClickCheck == "/views/jobs-faq.html") {
-			faqResults();
+			hideFAQresults();
 		} else if (buttonClickCheck == "/views/business-faq.html") {
-			faqResults();
+			hideFAQresults();
 		}
 	});
 	//Clears input box when input box is clicked
 	$("#searchBox").click(function() {
-		$("#searchBox").val('');
-		$("#box1 .resultsbox").empty();
-		$("#box2 .resultsbox").empty();
-		$("#box3 .resultsbox").empty();
-		box1active();
 		var inputClickCheck = location.pathname;
 		if (inputClickCheck = "/views/jobs-selection.html") {
-			loadIndustry();
-			loadJob();
+			clear_it_out();
 		}  else if (buttonClickCheck == "/views/jobs-faq.html") {
-			faqResults();
+			hideFAQresults();
 		} else if (buttonClickCheck == "/views/business-faq-faq.html") {
-			faqResults();
+			hideFAQresults();
 		}
 	});
 	//If input box is empty when mouse leaves top box, it fills it
@@ -176,4 +165,28 @@ function checkPage() {
 		questionActive();
 		faqHeader();
 	}
+}
+
+//Closes FAQ Box if it is empty or alerts user that they have begun to fill out form
+function hideFAQresults(){
+	$("#clearbutton").click(function() {
+		console.log("Initiated hideFAQresults");
+		var formchecker = check_form();
+		console.log("hideFAQresults" + formchecker);
+		if (formchecker == "true") {
+			clear_it_out();
+			box1active();
+    	} else {
+    		console.log("Alert would have triggered");
+    	}
+    });
+}
+
+function clear_it_out(){
+	loadIndustry();
+	loadJob();
+	$("#searchBox").val('');
+	$("#box1 .resultsbox").empty();
+	$("#box2 .resultsbox").empty();
+	$("#box3 .resultsbox").empty();
 }
