@@ -3,12 +3,12 @@ function check_form() {
 	console.log("Initiated check_form");
 	var step1formcheck = form_open_check();
 	console.log(step1formcheck);
-	if (step1formcheck == "false") {
+	if (step1formcheck == false) {
 		return false;
     } else {
     	var step2formcheck = is_form_empty();
     	console.log(step2formcheck);
-    	if (step2formcheck == "true"){
+    	if (step2formcheck == true){
     		return false;
     	}  else {
     		return true;
@@ -55,6 +55,6 @@ function alert_to_user() {
 	if (confirm("You have entered text into the FAQ form! Press OK if you want to discard this information.") == true) {
 		showFAQbutton();
     } else {
-    	openFAQ();
+    	//Do Nothing
     }
 }

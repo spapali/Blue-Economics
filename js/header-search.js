@@ -173,11 +173,10 @@ function hideFAQresults(){
 		console.log("Initiated hideFAQresults");
 		var formchecker = check_form();
 		console.log("hideFAQresults" + formchecker);
-		if (formchecker == "true") {
-			clear_it_out();
-			box1active();
-    	} else {
-    		console.log("Alert would have triggered");
+		if (formchecker == false) {
+			showFAQbutton();
+    	} else if (formchecker == true) {
+    		alert_to_user();
     	}
     });
 }

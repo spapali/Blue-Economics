@@ -171,9 +171,12 @@ function checkSubmit(){
 		console.log("Initiated checkSubmit");
 		var formcheck = check_form();
 		console.log(formcheck);
-		if (formcheck == "true") {
+		if (formcheck == true) {
+			console.log("checkSubmit came back true");
 			alert("Thank you for your submission. We'll send you an e-mail once your query has a response.");
-		} else {
+			showFAQbutton();
+		} else if (formcheck == false) {
+			console.log("checkSubmit came back false");
 			alert("You haven't entered anything into the form");
 		}
 	});
