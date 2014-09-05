@@ -164,6 +164,7 @@ function showFAQbutton() {
 	$("#open_faq_button").addClass("orange_button");
 	$("#open_faq_button").css({"position": "relative"});
 	box1active();
+	event.preventDefault();
 }
 
 function checkSubmit(){
@@ -172,12 +173,9 @@ function checkSubmit(){
 		var formcheck = check_form();
 		console.log(formcheck);
 		if (formcheck == true) {
-			console.log("checkSubmit came back true");
-			alert("Thank you for your submission. We'll send you an e-mail once your query has a response.");
-			showFAQbutton();
+			is_email_formatted();
 		} else if (formcheck == false) {
-			console.log("checkSubmit came back false");
-			alert("You haven't entered anything into the form");
+			alert("You haven't filled out the form correctly. Please review your submission.");
 		}
 	});
 }

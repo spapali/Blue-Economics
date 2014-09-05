@@ -169,14 +169,15 @@ function checkPage() {
 
 //Closes FAQ Box if it is empty or alerts user that they have begun to fill out form
 function hideFAQresults(){
+	event.preventDefault();
 	$("#clearbutton").click(function() {
 		console.log("Initiated hideFAQresults");
 		var formchecker = check_form();
 		console.log("hideFAQresults" + formchecker);
 		if (formchecker == false) {
-			showFAQbutton();
+			alert_to_user();
     	} else if (formchecker == true) {
-    		alert_to_user();
+    		showFAQbutton();
     	}
     });
 }
