@@ -10,11 +10,6 @@
 		}
 		
 		#bigvideobackground {
-			background: url(/media/images/Video_02-1080-Filter2.jpg) no-repeat center center fixed; 
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-			background-size: cover;
 			overflow:hidden;
 			position:fixed;
 			height:100%;
@@ -28,8 +23,9 @@
 		
 		#bigvideobackground video {
 			object-fit: cover;
-			z-index: 1 !important;
-			-webkit-transform: translateZ(1);
+			z-index: -1 !important;
+			-webkit-backface-visibility: hidden;
+			-webkit-transform: translateZ(-1);
 			margin-top: -10%;	
 		}
 		
@@ -39,6 +35,9 @@
 			width: 100%;
 			text-align: center;
 			top: 45%;
+			color: #FFFFFF;
+			font-family: 'Merriweather Sans', sans-serif;
+			font-weight: 700;
 			float: left;
 			text-transform: lowercase;
 		}
@@ -50,14 +49,17 @@
 			top: 95.5%;
 			margin-left: auto;
 			margin-right: auto;
+			font-family: 'Merriweather Sans', sans-serif;
+			font-weight: 400;
 			font-size: 1.25em;
-			vertical-align: middle;
+			vertical-align: bottom;
+			color: #FFFFFF;
 			text-align: center;
+			background-color: #08516F;
 			width: 100px;
 			height: 4%;
 			display: table;
-			text-transform: lowercase;
-			z-index: 2;
+			text-transform:lowercase;
 			-webkit-backface-visibility: hidden;
 			-webkit-transform: translateZ(2);
 		}
@@ -70,6 +72,7 @@
 		#menubar {
 			height: 100%;
 			width: 189px;
+			background-color: #08516F;
 			opacity: 0.83;
 			filter: alpha(opacity=83);
 			margin-left: auto;
@@ -78,88 +81,7 @@
 			padding-right: 10px;
 			-webkit-transform: translateZ(2);
 			z-index: 2 !important;
-		}
-
-		#menubar ul {
-			position:absolute; 
-			top: 35%;
-			line-height: 1;
-			padding: 0;
-			margin: 0;
-		}
-		
-		#menubar li {
-			padding: 0;
-			margin: 0;
-			list-style-type: none;
-			left: 0;
-			font-size: 0.9em;
-			margin-top: 10px;
-			text-align: center;
-		}
-		
-		#menubar img {
-			opacity: 1 !important;
-			filter: alpha(opacity=100) !important;
-		}
-		
-		a:link {
-			color: #F15A24;
-			font-weight: 900;
-			text-decoration: none;
-		}
-		
-		a:visited {
-			color: #F15A24;
-			font-weight: 900;
-			text-decoration: none;
-		}
-		
-		a:hover {
-			color: #FFFFFF;
-			text-decoration;
-		}
-		
-		#about_section {
-			overflow:hidden;
-			position:absolute;
-			height:100%;
-			width:100%;
-			top:99%;
-			left:0;
-			z-index: 2 !important;
-			-webkit-transform: translateZ(2);
-			padding: 0;
-			margin: 0;
-			outline: 0;
-			background: url(media/images/aboutpagebackground.jpg) no-repeat center center fixed; 
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-			background-size: cover;
-			font-family: 'Raleway', sans-serif;
-			font-weight: 500;
-			color: #FFFFFF;
-		}
-		
-		#about_section h2 {
-			font-family: 'Merriweather Sans', sans-serif;
-			font-weight: 700;
-			text-transform: lowercase;
-			color: #000000;
-			clear: both;
-		}
-		
-		#what_we_do {
-			width: 75%;
-			margin-left: auto;
-			margin-right: auto;
-			
-		}
-
-		a#layoverBtn {
-			text-align: center;
-		}
+		}	
 		
 		@media only screen and (min-width:556px) and (max-width:771px) {
 			#welcome {
@@ -171,11 +93,14 @@
 			#bigvideobackground video {
 				visibility: hidden !important;
 			}
-			#about_sectionBtn {
-				visibility: hidden;
+			#bigvideobackground {
+				background: url(/media/images/Video_02-1080-Filter2.jpg) no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
 			}
 			#welcome {
-				color: #000000;
 				text-align: center !important;
 				top: 0;
 				position: relative;
@@ -202,23 +127,93 @@
 				margin-right: auto;
 			}
 		}
-
-		.merriweather {
+		
+		#menubar ul {
+			position:absolute; 
+			top: 35%;
+			line-height: 1;
+			padding: 0;
+			margin: 0;
+		}
+		
+		#menubar li {
+			padding: 0;
+			margin: 0;
+			list-style-type: none;
+			left: 0;
 			font-family: 'Merriweather Sans', sans-serif;
-			font-weight: 300;
-		}
-
-		.bluebackground {
-			background-color: #08516F;
-		}
-
-		.white {
+			font-size: 0.9em;
+			margin-top: 10px;
+			text-align: center;
 			color: #FFFFFF;
+			
+		}
+		
+		#menubar img {
+			opacity: 1 !important;
+			filter: alpha(opacity=100) !important;
+		}
+		
+		a:link {
+			color: #FFFFFF !important;
+			text-decoration: none;
+		}
+		
+		a:visited {
+			color: #FFFFFF !important;
+			text-decoration: none;
+		}
+		
+		a:hover {
+			color: #6DA7BF !important;
+			text-decoration;
+		}
+		#about_section {
+			overflow:hidden;
+			position:absolute;
+			height:100%;
+			width:100%;
+			top:99%;
+			left:0;
+			z-index: 2 !important;
+			padding: 0;
+			margin: 0;
+			outline: 0;
+			background: url(media/images/aboutpagebackground.jpg) no-repeat center center fixed; 
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			font-family: 'Raleway', sans-serif;
+			font-weight: 500;
+			color: #FFFFFF;
+		}
+		
+		#about_section h2 {
+			font-family: 'Merriweather Sans', sans-serif;
+			font-weight: 700;
+			text-transform: lowercase;
+			color: #F15A24;
+			clear: both;
+		}
+		
+		#what_we_do {
+			width: 75%;
+			margin-left: auto;
+			margin-right: auto;
+			
 		}
 	</style>
 
     <link href='http://fonts.googleapis.com/css?family=Lato|Oswald|Merriweather+Sans|Raleway' rel='stylesheet' type='text/css'>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://scrolldjs.com/demo/js/scrolld.min.js"></script>
+	<script type="text/javascript" src="/js/external/bower_components/video.js/video.js"></script>
+	<script type="text/javascript" src="/js/external/bower_components/BigVideo.js/lib/bigvideo.js"></script>
+	<script type="text/javascript">
+		videoElement.addEventListener('canplay', function() { this.play(); } );
+	</script>
 </head>
 
 <body>
@@ -237,16 +232,16 @@
 			});
 		</script>-->
 	</div>
-	<div id="layover" class="layoverBtn">
-		<div id="welcome" class="merriweather white">
+	<div id="layover">
+		<div id="welcome">
  			<h1>How can we help you?</h1>
  		</div>
- 		<a id="about_sectionBtn" class="about_sectionBtn bluebackground" href="#about_section"><span class="merriweather">about us</span></a>
-    		<div id="menubar" class="bluebackground">
+ 		<a id="about_sectionBtn" class="about_sectionBtn" href="#about_section"><span>about us</span></a>
+    		<div id="menubar">
     			<ul>
     				<li><img src="/media/images/biglogo.png"></li>
-    				<li><a class="merriweather" href="/views/business-selection.html">I want to get small business advice</a></li>
-    				<li><a class="merriweather" href="/views/jobs-selection.html">I want to learn about better jobs</a></li>
+    				<li><a href="/views/business-selection.html">I want to get small business advice</a></li>
+    				<li><a href="/views/jobs-selection.html">I want to learn some job skills</a></li>
 			</ul>
 		</div>
 	</div>
@@ -258,26 +253,8 @@
 			<p>The ASCEND Project is developed by <a href="http://blueecon.com/">Blue Economics</a>.</p>
 			<p>Blue Economics is a professional volunteer organization that was founded in 2010 with the idea that people can come together and use their talents to uplift their communities. BE leverages the skills, experiences, knowledge, and networks of its members to develop solutions to issues and problems that facilitate the economic advancement of individuals and communities.</p>
 			<p>Blue Economics is partnering with the below agencies to bring the ASCEND Project to life.</p>
-
-			<a id="layoverBtn" class="layoverBtn" href="#layover">click to return to top</a>
 	</div>
-	<script>
-	$(document).ready(function(){
-		$("#about_sectionBtn").click(function() {
-  			$("#bigvideobackground video").css({"visibility": "hidden"});
-		});
-		$("#layoverBtn").click(function() {
-  			$("#bigvideobackground video").css({"visibility": "visible"});
-		});
-	});
-	</script>
-
-	<script type="text/javascript" src="http://scrolldjs.com/demo/js/scrolld.min.js"></script>
-	<script type="text/javascript" src="/js/external/bower_components/video.js/video.js"></script>
-	<script type="text/javascript" src="/js/external/bower_components/BigVideo.js/lib/bigvideo.js"></script>
-	<!--<script type="text/javascript">
-		videoElement.addEventListener('canplay', function() { this.play(); } );-->
-	</script>
+	
 	<script type="text/javascript">
 		$("[id*='Btn']").stop(true).on('click',function(e){e.preventDefault();$(this).scrolld();})
 	</script>
