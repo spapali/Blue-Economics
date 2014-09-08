@@ -23,8 +23,10 @@ $(document).ready(function() {
 			clear_it_out();
 			box1active();
 		} else if (buttonClickCheck == "/views/jobs-faq.html") {
+			console.log("clear button function triggered");
 			hideFAQresults();
 		} else if (buttonClickCheck == "/views/business-faq.html") {
+			console.log("clear button function triggered");
 			hideFAQresults();
 		}
 	});
@@ -34,8 +36,10 @@ $(document).ready(function() {
 		if (inputClickCheck = "/views/jobs-selection.html") {
 			clear_it_out();
 		}  else if (buttonClickCheck == "/views/jobs-faq.html") {
+			console.log("searchBox function triggered");
 			hideFAQresults();
 		} else if (buttonClickCheck == "/views/business-faq-faq.html") {
+			console.log("searchBox function triggered");
 			hideFAQresults();
 		}
 	});
@@ -169,17 +173,14 @@ function checkPage() {
 
 //Closes FAQ Box if it is empty or alerts user that they have begun to fill out form
 function hideFAQresults(){
-	event.preventDefault();
-	$("#clearbutton").click(function() {
-		console.log("Initiated hideFAQresults");
-		var formchecker = check_form();
-		console.log("hideFAQresults" + formchecker);
-		if (formchecker == false) {
-			alert_to_user();
-    	} else if (formchecker == true) {
-    		showFAQbutton();
-    	}
-    });
+	console.log("Initiated hideFAQresults");
+	var formchecker = check_form();
+	console.log("hideFAQresults" + formchecker);
+	if (formchecker == true) {
+		alert_to_user();
+    } else if (formchecker == false) {
+    	showFAQbutton();
+    }
 }
 
 function clear_it_out(){

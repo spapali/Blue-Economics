@@ -147,7 +147,6 @@ function openFAQ() {
 	});
 
 	checkSubmit();
-	hideFAQresults();
 }
 
 //Applies CSS to close FAQ Box
