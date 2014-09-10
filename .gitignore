@@ -1,12 +1,7 @@
 .idea
 /vendor/
-composer.lock
 
 composer.phar
-
-composer.lock
-
-composer.lock
 
 vendor/autoload.php
 
@@ -19,5 +14,3 @@ vendor/composer/autoload_real.php
 vendor/composer/ClassLoader.php
 
 vendor/composer/installed.json
-
-config/dev/mysql.ini
