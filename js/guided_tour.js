@@ -108,7 +108,7 @@ function hideFAQbutton() {
 }
 
 //Rollover states for FAQ Button
-function FAQbutton_rollover(){
+function FAQbuttonRollover(){
 	$("#open_faq_button").mouseover(function() {
 		$("#open_faq_button").css({"color": "#FFFFFF"});
 	});
@@ -169,10 +169,10 @@ function showFAQbutton() {
 function checkSubmit(){
 	$("#faq_submit").click(function(){
 		console.log("Initiated checkSubmit");
-		var formcheck = check_form();
+		var formcheck = checkForm();
 		console.log(formcheck);
 		if (formcheck == true) {
-			is_email_formatted();
+			isEmailFormatted();
 		} else if (formcheck == false) {
 			alert("You haven't filled out the form correctly. Please review your submission.");
 		}
@@ -195,7 +195,7 @@ $(document).ready(function(){
 		hideFAQbutton();
 	} else if (check == "/views/jobs-faq.html") {
 		faqResults();
-		FAQbutton_rollover();
+		FAQbuttonRollover();
 	} else if (check == "/views/business-selection.html") {
 		$("#box1 .labeltab p").text("Category");
 		$("#box2 .labeltab p").text("Topics");
@@ -203,6 +203,6 @@ $(document).ready(function(){
 		hideFAQbutton();
 	} else if (check == "/views/business-faq.html") {
 		faqResults();
-		FAQbutton_rollover();
+		FAQbuttonRollover();
 	}
 });

@@ -233,8 +233,8 @@ html {
 }
 
 .descriptor {
-	opacity: 1 !important;
-	font-weight: 900 !important;
+	opacity: 1;
+	font-weight: 900;
 }
 
 .selectable_result {
@@ -245,9 +245,9 @@ html {
 }
 
 .selectable_result:hover {
-	background-color: #F15A24 !important;
-	color: #FFFFFF !important;
-	opacity: 1 !important;
+	background-color: #F15A24;
+	color: #FFFFFF;
+	opacity: 1;
 	filter:alpha(opacity=100); /* For IE8 and earlier */
 }
 

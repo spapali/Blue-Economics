@@ -1,12 +1,12 @@
 //Checks whether form is open and/or empty
-function check_form() {
+function checkForm() {
 	console.log("Initiated check_form");
-	var step1formcheck = form_open_check();
+	var step1formcheck = formOpenCheck();
 	console.log(step1formcheck);
 	if (step1formcheck == false) {
 		return false;
     } else {
-    	var step2formcheck = is_form_empty();
+    	var step2formcheck = isFormEmpty();
     	console.log(step2formcheck);
     	if (step2formcheck == true){
     		return false;
@@ -17,8 +17,8 @@ function check_form() {
 }
 
 //Checks whether form is open
-function form_open_check() {
-	console.log("Initiated form_open_check");
+function formOpenCheck() {
+	console.log("Initiated formOpenCheck");
 	var cssCheck = $("#box3 .resultsbox").css("visibility");
 		console.log(cssCheck);
 		if (cssCheck == "visible") {
@@ -29,8 +29,8 @@ function form_open_check() {
 }
 
 //Checks if user has entered any information into form
-function is_form_empty() {
-	console.log("Initiated is_form_empty");
+function isFormEmpty() {
+	console.log("Initiated isFormEmpty");
 	if (($($.trim("#faq_input1")).val() === "type your question here") || ($($.trim("#faq_input2")).val() === "") || ($($.trim("#faq_input1")).val() === "")){
 		console.log("Initiated form check - empty inputs recognized");
 		if (($($.trim("#faq_input1")).val() === "type your question here") || ($($.trim("#faq_input1")).val() === "")){
@@ -50,7 +50,7 @@ function is_form_empty() {
 }
 
 //Alerts user if they have begun to fill out form and abandoned it
-function alert_to_user() {
+function alertToUser() {
 	console.log("Initiated alert_to_user");
 	if (confirm("Are you sure you want to close the FAQ form? \nYou have already begun to fill it out. \nPress OK if you want to discard this information.") == true) {
 		showFAQbutton();
@@ -60,7 +60,7 @@ function alert_to_user() {
     }
 }
 
-function is_email_formatted() {
+function isEmailFormatted() {
 	console.log("Initiated is_email_formatted");
 	var email = ($("#faq_input2").val()).trim();
 	var whereAt = email.indexOf("@");

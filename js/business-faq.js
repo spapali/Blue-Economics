@@ -10,5 +10,4 @@ function loadPartials() {
 
 $(document).ready(function() {
 	loadPartials();
-	console.log(location.pathname);
 });

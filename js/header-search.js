@@ -174,10 +174,10 @@ function checkPage() {
 //Closes FAQ Box if it is empty or alerts user that they have begun to fill out form
 function hideFAQresults(){
 	console.log("Initiated hideFAQresults");
-	var formchecker = check_form();
+	var formchecker = checkForm();
 	console.log("hideFAQresults" + formchecker);
 	if (formchecker == true) {
-		alert_to_user();
+		alertToUser();
     } else if (formchecker == false) {
     	showFAQbutton();
     }
