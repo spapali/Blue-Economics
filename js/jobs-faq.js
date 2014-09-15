@@ -8,7 +8,26 @@ function loadPartials() {
 	$('#three-tabs').load('./partials/searchresults.html');
 }
 
+function loadQuestions(selector) {
+		//Pulls all Questions on page load
+		$.ajax({
+			url: "/questions",
+			type: "GET",
+			success: function(result) {
+				html = '';
+				$.each(result, function(i, item) {
+					html += "<a href=\"#\" class=\"selectable_result\">" + item.text + "</a><br/>";
+				});
+				$("#box1 .resultsbox").html(html);
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				alert("Something didn't work");
+			}
+		});
+}
+
 $(document).ready(function() {
 	loadPartials();
+	loadQuestions();
 	console.log(location.pathname);
 });
