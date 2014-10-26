@@ -436,5 +436,4 @@ $app->get('/questions/:id/answers', function($id) use ($app) {
 include_once 'questions_responses.php';
 
 $app->run();
-
 ?>
