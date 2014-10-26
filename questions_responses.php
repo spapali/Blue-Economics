@@ -112,14 +112,14 @@ $app->get('/get_recent_questions/', function() use ($app) {
  */
 
 /**
- * ALTER TABLE `faq_question` ADD `Readed` BOOLEAN NOT NULL DEFAULT FALSE;
+ * ALTER TABLE `faq_question` ADD `Read` BOOLEAN NOT NULL DEFAULT FALSE;
  * */
 
-$app->get('/update_readed_question/:q_id', function($q_id) use ($app) {
+$app->get('/update_read_question/:q_id', function($q_id) use ($app) {
 	executeSql(
         '
 			UPDATE faq_question
-			SET Readed=1
+			SET Read=1
 			WHERE Id=:q_id;
         ',
         [
