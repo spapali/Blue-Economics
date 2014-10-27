@@ -433,5 +433,7 @@ $app->get('/questions/:id/answers', function($id) use ($app) {
 	$app->response->write(json_encode($result));
 });
 
+include_once 'questions_responses.php';
+
 $app->run();
 ?>
