@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function transactionSql($query, array $params = array(), &$mysql) {
     $app = \Slim\Slim::getInstance();
@@ -6,7 +6,7 @@ function transactionSql($query, array $params = array(), &$mysql) {
 
     $handler = $mysql->prepare($query);
     $handler->execute($params);
-    return $handler->fetchAll(PDO::FETCH_OBJ);    
+    return $handler->fetchAll(PDO::FETCH_OBJ);
 };
 
 /**
@@ -15,11 +15,20 @@ function transactionSql($query, array $params = array(), &$mysql) {
  * @param int $q_id id of the question, e.g. 1.
  * @param text $text text of the response, e.g. "You can find information on the Contact form".
  * @param int $faq_rsid id of the response source, e.g. 1.
- * 
+ *
  * @return none
  */
 
-$app->get('/add_response_from_question/:q_id/:text/:faq_rsid', function($q_id, $text, $faq_rsid) use ($app) {
+$app->post('/add_response_from_question/:q_id/:faq_rsid', function($q_id, $faq_rsid) use ($app) {
+
+	if (isset($_POST['text'])) {
+		$text = $_POST['text'];
+	} else {
+		$app->response()->status(400);
+		$app->response()->header('X-Status-Reason', 'Missing "text" parameter');
+		$app->response->write('Missing "text" parameter');
+		return;
+	}
 
 	try {
 		$mysql = $app->mysql;
@@ -61,7 +70,7 @@ $app->get('/add_response_from_question/:q_id/:text/:faq_rsid', function($q_id, $
  * A function that will flag a question as a duplicate or as containing inappropriate language. (Ruben)
  *
  * @param int $q_id id of the question, e.g. 1.
- * 
+ *
  * @return none
  */
 
@@ -86,7 +95,7 @@ $app->get('/update_inappropriate_question/:q_id', function($q_id) use ($app) {
  * This function should be sorting questions by most recent.. (Ruben)
  *
  * @param none
- * 
+ *
  * @return json composed by questions sorted by most recent.
  */
 
@@ -107,7 +116,7 @@ $app->get('/get_recent_questions/', function() use ($app) {
  * A function that accepts an input from the user that changes the question's state to read from unread.
  *
  * @param int $q_id id of the question, e.g. 1.
- * 
+ *
  * @return none
  */
 
@@ -132,7 +141,7 @@ $app->get('/update_read_question/:q_id', function($q_id) use ($app) {
  * A function that will accept a like to to a specific response.
  *
  * @param int $r_id id of the response, e.g. 1.
- * 
+ *
  * @return none
  */
 
