@@ -271,7 +271,7 @@ $app->get('/questions', function() use ($app) {
 	}
 
 	if (isset($occupationIds) && count($occupationIds) > 0) {
-		$questions = executeSql(
+		/*$questions = executeSql(
 			'
 				SELECT
 					fq.Id AS id,
@@ -285,9 +285,22 @@ $app->get('/questions', function() use ($app) {
 				ORDER BY fq.Text ASC
 			',
 			['occupationIds' => implode(',', $occupationIds)]
+		);*/
+		$questions = executeSql(
+			'
+				SELECT DISTINCT
+					fq.Id AS id,
+					fq.Text AS text
+				FROM faq_question AS fq
+					INNER JOIN faq_response ON
+						faq_response.FAQ_QuestionId = fq.Id
+				WHERE fq.OccupationId IN (:occupationIds)
+				ORDER BY fq.Text ASC
+			',
+			['occupationIds' => implode(',', $occupationIds)]
 		);
 	} else {
-		$questions = executeSql('
+		/*$questions = executeSql('
 			SELECT
 				fq.Id AS id,
 				fq.Text AS text,
@@ -296,6 +309,15 @@ $app->get('/questions', function() use ($app) {
 				LEFT JOIN faq_questionassignment AS fqa ON
 					fqa.FAQ_QuestionID = fq.Id
 			HAVING isAnswered = 1
+			ORDER BY fq.Text ASC
+		');*/
+		$questions = executeSql('
+			SELECT DISTINCT
+				fq.Id AS id,
+				fq.Text AS text
+			FROM faq_question AS fq
+				INNER JOIN faq_response ON
+					faq_response.FAQ_QuestionId = fq.Id
 			ORDER BY fq.Text ASC
 		');
 	}
@@ -330,8 +352,8 @@ $app->post('/questions', function() use ($app) {
 
     executeSql(
         '
-            INSERT INTO faq_question (`Text`, `OccupationId`, `FAQ_QuestionSourceId`, `dateCreated`)
-            VALUES (:text, :job, :sourceId, NOW())
+            INSERT INTO faq_question (`Text`, `OccupationId`, `DateCreated`, `FAQ_QuestionSourceId`)
+            VALUES (:text, :job, NOW(), :sourceId)
         ',
         [
             'text' => $app->request->params('text'),
@@ -343,7 +365,7 @@ $app->post('/questions', function() use ($app) {
 
 $app->get('/questions/search/:searchQuery', function($searchQuery) use($app) {
     // find matching questions
-    $questions = executeSql(
+    /*$questions = executeSql(
         '
             SELECT
                 fq.Id AS id,
@@ -354,6 +376,19 @@ $app->get('/questions/search/:searchQuery', function($searchQuery) use($app) {
                     fqa.FAQ_QuestionID = fq.Id
             WHERE MATCH(fq.Text) AGAINST (:searchQuery)
             HAVING isAnswered = 1
+            ORDER BY fq.Text ASC
+        ',
+        ['searchQuery' => $searchQuery]
+    );*/
+	$questions = executeSql(
+        '
+            SELECT
+                fq.Id AS id,
+                fq.Text AS text
+            FROM faq_question AS fq
+                INNER JOIN faq_response ON
+                    faq_response.FAQ_QuestionId = fq.Id
+            WHERE MATCH(fq.Text) AGAINST (:searchQuery)
             ORDER BY fq.Text ASC
         ',
         ['searchQuery' => $searchQuery]
@@ -369,7 +404,7 @@ $app->get('/questions/search/:searchQuery', function($searchQuery) use($app) {
     }
 
     // find matching answers
-    $answers = executeSql(
+    /*$answers = executeSql(
         '
             SELECT
                 fq.Id AS id,
@@ -384,6 +419,21 @@ $app->get('/questions/search/:searchQuery', function($searchQuery) use($app) {
                     fr.Id = frfq.FAQ_Response_Id
             WHERE MATCH(fr.Text) AGAINST(:searchQuery)
             HAVING isAnswered = 1
+            ORDER BY fq.Text ASC
+        ',
+        ['searchQuery' => $searchQuery]
+    );*/
+    $answers = executeSql(
+        '
+            SELECT
+                fq.Id AS id,
+                fq.Text AS text
+            FROM faq_question AS fq
+                JOIN faq_questionassignment AS fqa ON
+                    fqa.FAQ_QuestionID = fq.Id
+                JOIN faq_response AS fr ON
+                    fr.FAQ_QuestionId = fq.Id
+            WHERE MATCH(fr.Text) AGAINST(:searchQuery)
             ORDER BY fq.Text ASC
         ',
         ['searchQuery' => $searchQuery]
@@ -407,7 +457,7 @@ $app->get('/questions/search/:searchQuery', function($searchQuery) use($app) {
 });
 
 $app->get('/questions/:id/answers', function($id) use ($app) {
-	$answers = executeSql(
+	/*$answers = executeSql(
 		'
 			SELECT
 				fr.Id AS id,
@@ -416,6 +466,16 @@ $app->get('/questions/:id/answers', function($id) use ($app) {
 				JOIN faq_responsefaq_question AS frq ON
 					frq.FAQ_Response_Id = fr.Id
 			WHERE frq.FAQ_Question_Id = :questionId
+		',
+		['questionId' => $id]
+	);*/
+	$answers = executeSql(
+		'
+			SELECT
+				fr.Id AS id,
+				fr.Text AS text
+			FROM faq_response AS fr
+			WHERE fr.FAQ_QuestionId = :questionId
 		',
 		['questionId' => $id]
 	);
@@ -433,7 +493,7 @@ $app->get('/questions/:id/answers', function($id) use ($app) {
 	$app->response->write(json_encode($result));
 });
 
-include_once 'questions_responses.php';
+include_once 'expert_operations.php';
 
 $app->run();
 ?>
