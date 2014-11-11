@@ -421,10 +421,6 @@ $app->get('/questions/:id/answers', function($id) use ($app) {
 	$app->response->write(json_encode($result));
 });
 
-/**
- * This file includes the operations of the expert in their dashboard
- */
-
 include_once 'expert_operations.php';
 
 $app->run();

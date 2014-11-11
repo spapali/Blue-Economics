@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This file includes the operations of the expert in their dashboard
+ */
+
 function transactionSql($query, array $params = array(), &$mysql) {
     $app = \Slim\Slim::getInstance();
     $app->log->debug(sprintf("Executing query: %s with params: %s", $query, json_encode($params)));
