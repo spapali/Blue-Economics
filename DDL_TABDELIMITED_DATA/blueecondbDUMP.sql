@@ -141,7 +141,7 @@ CREATE TABLE `faq_questionassignment` (
   `IsAnswered` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'we should delete this information, it is implied in the table faq_response by the fields FAQ_ResponseSourceId and FAQ_QuestionId',
   `IsRead` tinyint(1) NOT NULL DEFAULT '0',
   `IsDuplicated` tinyint(1) NOT NULL DEFAULT '0',
-  `IsCensured` tinyint(1) NOT NULL DEFAULT '0',
+  `IsCensored` tinyint(1) NOT NULL DEFAULT '0',
   `IsExpunged` tinyint(1) NOT NULL DEFAULT '0',
   `FAQ_ExpertID` int(11) NOT NULL,
   `FAQ_QuestionID` int(11) NOT NULL,

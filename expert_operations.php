@@ -79,11 +79,11 @@ $app->get('/update_duplicated_question/:e_id/:q_id', function($e_id, $q_id) use 
  * @return none
  */
 
-$app->get('/update_censured_question/:e_id/:q_id', function($e_id, $q_id) use ($app) {
+$app->get('/update_censored_question/:e_id/:q_id', function($e_id, $q_id) use ($app) {
 	executeSql(
         '
 			UPDATE faq_questionassignment
-			SET IsCensured=1
+			SET IsCensored=1
 			WHERE FAQ_ExpertID=:e_id AND FAQ_QuestionID=:q_id;
         ',
         [
